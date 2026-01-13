@@ -2,40 +2,48 @@ import Link from "next/link";
 export default function KambazNavigation() {
   return (
     <div id="wd-kambaz-navigation">
-      <a href="https://www.northeastern.edu/" id="wd-neu-link" target="_blank">
-        Northeastern
-      </a>
-      <br />
+      <ul id="navbar">
+        <li>
+          <a
+            href="https://www.northeastern.edu/"
+            id="wd-neu-link"
+            target="_blank"
+          >
+            Northeastern
+          </a>
+        </li>
+        <br />
 
-      <Link href="/account" id="wd-account-link">
-        Account
-      </Link>
-      <br />
+        <Link href="/account" id="wd-account-link">
+          <li>Account</li>
+        </Link>
+        <br />
 
-      <Link href="/dashboard" id="wd-dashboard-link">
-        Dashboard
-      </Link>
-      <br />
+        <Link href="/dashboard" id="wd-dashboard-link">
+          <li>Dashboard</li>
+        </Link>
+        <br />
 
-      <Link href="/dashboard" id="wd-course-link">
-        Courses
-      </Link>
-      <br />
+        <Link href="/dashboard" id="wd-course-link">
+          <li>Courses</li>
+        </Link>
+        <br />
 
-      <Link href="/calendar" id="wd-calendar-link">
-        Calendar
-      </Link>
-      <br />
+        <Link href="/calendar" id="wd-calendar-link">
+          <li>Calendar</li>
+        </Link>
+        <br />
 
-      <Link href="/inbox" id="wd-inbox-link">
-        Inbox
-      </Link>
-      <br />
+        <Link href="/inbox" id="wd-inbox-link">
+          <li>Inbox</li>
+        </Link>
+        <br />
 
-      <Link href="/labs" id="wd-labs-link">
-        Labs
-      </Link>
-      <br />
+        <Link href="/labs" id="wd-labs-link">
+          <li>Labs</li>
+        </Link>
+        <br />
+      </ul>
     </div>
   );
 }
