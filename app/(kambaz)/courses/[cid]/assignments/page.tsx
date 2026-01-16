@@ -14,14 +14,14 @@ export default function Assignments() {
       </h3>
       <ul id="wd-assignment-list">
         <li className="wd-assignment-list-item">
-          <Link href={`/courses/${cid}/assignments/1`}>A1 - ENV + HTML</Link>
+          <Link href={`/courses/${cid}/assignments/123`}>A1 - ENV + HTML</Link>
           <p>
             Multiple Modules | Not available until May 6 at 12:00am | Due May 13
             at 11:59pm | 100 pts
           </p>
         </li>
         <li className="wd-assignment-list-item">
-          <Link href={`/courses/${cid}/assignments/2`}>
+          <Link href={`/courses/${cid}/assignments/456`}>
             A2 - CSS + BOOTSTRAP
           </Link>
           <p>
@@ -30,7 +30,7 @@ export default function Assignments() {
           </p>
         </li>
         <li className="wd-assignment-list-item">
-          <Link href={`/courses/${cid}/assignments/3`}>
+          <Link href={`/courses/${cid}/assignments/789`}>
             A3 - JAVASCRIPT + REACT
           </Link>
           <p>
