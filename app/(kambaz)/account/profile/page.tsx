@@ -1,7 +1,6 @@
 import Link from "next/link";
 export default function Profile() {
   return (
-        <h1>ONLY ON A1</h1>
     <div id="wd-profile-screen">
       <h3>Profile</h3>
       <input
