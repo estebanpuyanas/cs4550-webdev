@@ -2,7 +2,6 @@
 export default function Lab1() {
   return (
     <div id="wd-lab1">
-      <h1>ONLY ON A1</h1>
       <h1>Labs</h1>
       <h2>Lab 1</h2>
       <h3>HTML Examples</h3>
