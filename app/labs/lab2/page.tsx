@@ -9,6 +9,17 @@ import Dimensions from "./Dimensions";
 import Positions from "./Positions";
 import ZIndex from "./ZIndex";
 import Float from "./Float";
+import GridLayout from "./GridLayout";
+import Flex from "./Flex";
+import MediaQueriesDemo from "./MediaQueriesDemo";
+import ReactIconsSampler from "./ReactIconsSampler";
+import TailwindSpacing from "./tailwind/TailwindSpacing";
+import TailwindLab from "./tailwind/page";
+import TailwindTypography from "./tailwind/TailwindTypography";
+import TailwindBackgroundColors from "./tailwind/TailwindBackgroundColors";
+import TailwindResponsiveDesign from "./tailwind/TailwindResponsiveDesign";
+import TailwindFilters from "./tailwind/TailwindFilters";
+import TailwindGrids from "./tailwind/TailwindGrids";
 
 export default function Lab2() {
   return (
@@ -68,6 +79,17 @@ export default function Lab2() {
       <Positions />
       <ZIndex />
       <Float />
+      <GridLayout />
+      <Flex />
+      <MediaQueriesDemo />
+      <ReactIconsSampler />
+      <TailwindLab />
+      <TailwindSpacing />
+      <TailwindTypography />
+      <TailwindBackgroundColors />
+      <TailwindResponsiveDesign />
+      <TailwindFilters />
+      <TailwindGrids />
     </div>
   );
 }
