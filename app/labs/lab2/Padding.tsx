@@ -10,12 +10,14 @@ export default function Padding() {
       >
         Padded top left{" "}
       </div>
+      <br />
       <div
         className="wd-padded-bottom-right wd-border-fat 
        wd-border-blue wd-border-solid wd-bg-color-yellow"
       >
         Padded bottom right{" "}
       </div>
+      <br />
       <div
         className="wd-padding-fat wd-border-fat 
        wd-border-yellow wd-border-solid wd-bg-color-blue wd-fg-color-white"

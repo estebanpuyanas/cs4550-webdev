@@ -10,6 +10,7 @@ export default function Borders() {
       >
         Solid fat red border
       </p>
+      <br />
       <p
         className="wd-border-thin
      wd-border-blue wd-border-dashed"
