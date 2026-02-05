@@ -24,6 +24,8 @@ import ScreenSizeLabel from "./ScreenSizeLabel";
 import BootstrapGrids from "./BootstrapGrid";
 import BootstrapTables from "./BootstrapTables";
 import BootstrapLists from "./BootstrapLists";
+import BootstrapForms from "./BootstrapForms";
+import BootstrapNavigation from "./BootstrapNavigation";
 import { Container } from "react-bootstrap";
 
 export default function Lab2() {
@@ -99,6 +101,8 @@ export default function Lab2() {
       <ScreenSizeLabel />
       <BootstrapTables />
       <BootstrapLists />
+      <BootstrapForms />
+      <BootstrapNavigation />
     </Container>
   );
 }
