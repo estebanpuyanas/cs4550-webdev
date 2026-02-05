@@ -1,4 +1,14 @@
-import { Nav, NavItem, NavLink } from "react-bootstrap";
+import {
+  Card,
+  CardImg,
+  CardTitle,
+  CardText,
+  Button,
+  CardBody,
+  Nav,
+  NavItem,
+  NavLink,
+} from "react-bootstrap";
 export default function BootstrapNavigation() {
   return (
     <div id="wd-css-navigating-with-tabs">
@@ -19,6 +29,21 @@ export default function BootstrapNavigation() {
           </NavLink>
         </NavItem>
       </Nav>
+      <div id="wd-css-navigating-with-cards">
+        <h2> Cards </h2>
+        <Card style={{ width: "18rem" }}>
+          <CardImg variant="top" src="images/stacked.jpg" />
+          <CardBody>
+            <CardTitle>BSD Daemon "Beastie"</CardTitle>
+            <CardText>
+              Beastie is the mascot of BSD operating systems. He's named after
+              system daemons, which are background processes that handle system
+              tasks.
+            </CardText>
+            <Button variant="primary">Boldly Go</Button>
+          </CardBody>
+        </Card>
+      </div>
     </div>
   );
 }
