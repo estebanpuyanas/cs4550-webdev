@@ -85,7 +85,7 @@ export default function BootstrapForms() {
             <FormControl type="email" defaultValue="email@example.com" />
           </Col>
         </Row>
-        <Row className="mb-3" controlId="password1">
+        <Row className="mb-3" controlid="password1">
           <FormLabel column sm={2}>
             {" "}
             Password{" "}
@@ -94,7 +94,7 @@ export default function BootstrapForms() {
             <FormControl type="password" />
           </Col>
         </Row>
-        <Row className="mb-3" controlId="textarea2">
+        <Row className="mb-3" controlid="textarea2">
           <FormLabel column sm={2}>
             {" "}
             Bio{" "}
@@ -107,7 +107,7 @@ export default function BootstrapForms() {
       <div id="wd-css-responsive-forms-2">
         <h3>Responsive forms 2</h3>
         <Form>
-          <Row className="mb-3" controlId="formHorizontalEmail">
+          <Row className="mb-3" controlid="formHorizontalEmail">
             <FormLabel column sm={2}>
               {" "}
               Email{" "}
@@ -117,7 +117,7 @@ export default function BootstrapForms() {
               <FormControl type="email" placeholder="Email" />{" "}
             </Col>
           </Row>
-          <Row className="mb-3" controlId="formHorizontalPassword">
+          <Row className="mb-3" controlid="formHorizontalPassword">
             <FormLabel column sm={2}>
               {" "}
               Password{" "}
