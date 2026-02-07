@@ -20,10 +20,17 @@ import TailwindBackgroundColors from "./tailwind/TailwindBackgroundColors";
 import TailwindResponsiveDesign from "./tailwind/TailwindResponsiveDesign";
 import TailwindFilters from "./tailwind/TailwindFilters";
 import TailwindGrids from "./tailwind/TailwindGrids";
+import ScreenSizeLabel from "./ScreenSizeLabel";
+import BootstrapGrids from "./BootstrapGrid";
+import BootstrapTables from "./BootstrapTables";
+import BootstrapLists from "./BootstrapLists";
+import BootstrapForms from "./BootstrapForms";
+import BootstrapNavigation from "./BootstrapNavigation";
+import { Container } from "react-bootstrap";
 
 export default function Lab2() {
   return (
-    <div id="wd-lab2">
+    <Container>
       <h2>Lab 2 - Cascading Style Sheets</h2>
       <h3>Styling with the STYLE Attribute</h3>
       <div id="wd-css-id-selectors">
@@ -90,6 +97,12 @@ export default function Lab2() {
       <TailwindResponsiveDesign />
       <TailwindFilters />
       <TailwindGrids />
-    </div>
+      <BootstrapGrids />
+      <ScreenSizeLabel />
+      <BootstrapTables />
+      <BootstrapLists />
+      <BootstrapForms />
+      <BootstrapNavigation />
+    </Container>
   );
 }
