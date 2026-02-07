@@ -57,7 +57,7 @@ export default function CourseNavigation() {
       </Link>
 
       <Link
-        href="/courses/1234/people/Table"
+        href="/courses/1234/people/table"
         id="wd-course-people-link"
         className="list-group-item text-danger border-0"
       >
