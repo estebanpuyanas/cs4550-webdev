@@ -7,6 +7,7 @@ import {
   Button,
   Form,
   InputGroup,
+  Badge,
 } from "react-bootstrap";
 import InputGroupText from "react-bootstrap/InputGroupText";
 import { FaCheckCircle } from "react-icons/fa";
@@ -33,9 +34,6 @@ export default function Assignments() {
           <Button variant="danger">
             <BsPlus className="fs-4" /> Assignment
           </Button>
-          <Button variant="secondary">
-            <IoEllipsisVertical className="fs-5" />
-          </Button>
         </div>
       </div>
 
@@ -47,17 +45,23 @@ export default function Assignments() {
               <strong>ASSIGNMENTS</strong>
             </div>
             <div>
-              <span className="me-3">40% of Total</span>
+              <Badge
+                bg="secondary"
+                className="me-2 text-dark border border-dark"
+              >
+                40% of Total
+              </Badge>
               <BsPlus className="fs-4" />
               <IoEllipsisVertical className="fs-5" />
             </div>
           </div>
         </ListGroupItem>
 
-        <ListGroupItem className="p-3 ps-1 border-start border-success border-5">
+        <ListGroupItem className="p-3 ps-1 border-start border-success border-5 border-top-0 border-end-0 border-bottom-0">
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-start">
               <BsGripVertical className="me-2 fs-3 text-secondary" />
+              <LuNotebookPen className="me-2 fs-4 text-success" />
               <div className="ms-2">
                 <a href="#" className="text-dark text-decoration-none fw-bold">
                   A1
@@ -78,10 +82,11 @@ export default function Assignments() {
           </div>
         </ListGroupItem>
 
-        <ListGroupItem className="p-3 ps-1 border-start border-success border-5">
+        <ListGroupItem className="p-3 ps-1 border-start border-success border-5 border-top-0 border-end-0 border-bottom-0">
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-start">
               <BsGripVertical className="me-2 fs-3 text-secondary" />
+              <LuNotebookPen className="me-2 fs-4 text-success" />
               <div className="ms-2">
                 <a href="#" className="text-dark text-decoration-none fw-bold">
                   A2
@@ -102,10 +107,11 @@ export default function Assignments() {
           </div>
         </ListGroupItem>
 
-        <ListGroupItem className="p-3 ps-1 border-start border-success border-5">
+        <ListGroupItem className="p-3 ps-1 border-start border-success border-5 border-top-0 border-end-0 border-bottom-0">
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-start">
               <BsGripVertical className="me-2 fs-3 text-secondary" />
+              <LuNotebookPen className="me-2 fs-4 text-success" />
               <div className="ms-2">
                 <a href="#" className="text-dark text-decoration-none fw-bold">
                   A3
