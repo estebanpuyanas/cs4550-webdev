@@ -1,49 +1,92 @@
+import { AiOutlineDashboard } from "react-icons/ai";
+import { IoCalendarOutline } from "react-icons/io5";
+import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
+import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
+import { ListGroup, ListGroupItem } from "react-bootstrap";
 import Link from "next/link";
+
 export default function KambazNavigation() {
   return (
-    <div id="wd-kambaz-navigation">
-      <ul id="navbar">
-        <li>
-          <a
-            href="https://www.northeastern.edu/"
-            id="wd-neu-link"
-            target="_blank"
-          >
-            Northeastern
-          </a>
-        </li>
-        <br />
+    <ListGroup
+      id="wd-kambaz-navigation"
+      style={{ width: 110 }}
+      className="rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-black z-2"
+    >
+      <ListGroupItem
+        className="bg-black border-0 text-center"
+        as="a"
+        target="_blank"
+        href="https://www.northeastern.edu/"
+        id="wd-neu-link"
+      >
+        <img src="/images/NEU.png" width="75px" alt="Northeastern University" />
+      </ListGroupItem>
 
-        <Link href="/account" id="wd-account-link">
-          <li>Account</li>
+      <ListGroupItem className="border-0 bg-black text-center">
+        <Link
+          href="/account"
+          id="wd-account-link"
+          className="text-white text-decoration-none"
+        >
+          <FaRegCircleUser className="fs-1 text-white" />
+          Account
         </Link>
-        <br />
+      </ListGroupItem>
 
-        <Link href="/dashboard" id="wd-dashboard-link">
-          <li>Dashboard</li>
+      <ListGroupItem className="border-0 bg-white text-center">
+        <Link
+          href="/dashboard"
+          id="wd-dashboard-link"
+          className="text-danger text-decoration-none"
+        >
+          <AiOutlineDashboard className="fs-1 text-danger" />
+          Dashboard
         </Link>
-        <br />
+      </ListGroupItem>
 
-        <Link href="/dashboard" id="wd-course-link">
-          <li>Courses</li>
+      <ListGroupItem className="border-0 bg-black text-center">
+        <Link
+          href="/courses"
+          id="wd-courses-link"
+          className="text-white text-decoration-none"
+        >
+          <LiaBookSolid className="fs-1 text-danger" />
+          Courses
         </Link>
-        <br />
+      </ListGroupItem>
 
-        <Link href="/calendar" id="wd-calendar-link">
-          <li>Calendar</li>
+      <ListGroupItem className="border-0 bg-black text-center">
+        <Link
+          href="/calendar"
+          id="wd-calendar-link"
+          className="text-white text-decoration-none"
+        >
+          <IoCalendarOutline className="fs-1 text-danger" />
+          Calendar
         </Link>
-        <br />
+      </ListGroupItem>
 
-        <Link href="/inbox" id="wd-inbox-link">
-          <li>Inbox</li>
+      <ListGroupItem className="border-0 bg-black text-center">
+        <Link
+          href="/inbox"
+          id="wd-inbox-link"
+          className="text-white text-decoration-none"
+        >
+          <FaInbox className="fs-1 text-danger" />
+          Inbox
         </Link>
-        <br />
+      </ListGroupItem>
 
-        <Link href="/labs" id="wd-labs-link">
-          <li>Labs</li>
+      <ListGroupItem className="border-0 bg-black text-center">
+        <Link
+          href="/labs"
+          id="wd-labs-link"
+          className="text-white text-decoration-none"
+        >
+          <LiaCogSolid className="fs-1 text-danger" />
+          Labs
         </Link>
-        <br />
-      </ul>
-    </div>
+      </ListGroupItem>
+    </ListGroup>
   );
 }
