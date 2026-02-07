@@ -4,11 +4,12 @@ import { LiaBookSolid, LiaCogSolid } from "react-icons/lia";
 import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 import Link from "next/link";
+
 export default function KambazNavigation() {
   return (
     <ListGroup
       id="wd-kambaz-navigation"
-      style={{ width: 120 }}
+      style={{ width: 110 }}
       className="rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-black z-2"
     >
       <ListGroupItem
@@ -43,44 +44,44 @@ export default function KambazNavigation() {
         </Link>
       </ListGroupItem>
 
-      <ListGroupItem className="border-0 bg-white text-center">
+      <ListGroupItem className="border-0 bg-black text-center">
         <Link
           href="/courses"
           id="wd-courses-link"
-          className="text-danger text-decoration-none"
+          className="text-white text-decoration-none"
         >
           <LiaBookSolid className="fs-1 text-danger" />
           Courses
         </Link>
       </ListGroupItem>
 
-      <ListGroupItem className="border-0 bg-white text-center">
+      <ListGroupItem className="border-0 bg-black text-center">
         <Link
           href="/calendar"
           id="wd-calendar-link"
-          className="text-danger text-decoration-none"
+          className="text-white text-decoration-none"
         >
           <IoCalendarOutline className="fs-1 text-danger" />
           Calendar
         </Link>
       </ListGroupItem>
 
-      <ListGroupItem className="border-0 bg-white text-center">
+      <ListGroupItem className="border-0 bg-black text-center">
         <Link
           href="/inbox"
           id="wd-inbox-link"
-          className="text-danger text-decoration-none"
+          className="text-white text-decoration-none"
         >
           <FaInbox className="fs-1 text-danger" />
           Inbox
         </Link>
       </ListGroupItem>
 
-      <ListGroupItem className="border-0 bg-white text-center">
+      <ListGroupItem className="border-0 bg-black text-center">
         <Link
           href="/labs"
           id="wd-labs-link"
-          className="text-danger text-decoration-none"
+          className="text-white text-decoration-none"
         >
           <LiaCogSolid className="fs-1 text-danger" />
           Labs
