@@ -7,9 +7,9 @@ import Link from "next/link";
 export default function KambazNavigation() {
   return (
     <ListGroup
-      className="rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-black z-2"
-      style={{ width: 120 }}
       id="wd-kambaz-navigation"
+      style={{ width: 120 }}
+      className="rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-black z-2"
     >
       <ListGroupItem
         className="bg-black border-0 text-center"
@@ -65,7 +65,27 @@ export default function KambazNavigation() {
         </Link>
       </ListGroupItem>
 
-      {/* complete styling the rest of the links */}
+      <ListGroupItem className="border-0 bg-white text-center">
+        <Link
+          href="/inbox"
+          id="wd-inbox-link"
+          className="text-danger text-decoration-none"
+        >
+          <FaInbox className="fs-1 text-danger" />
+          Inbox
+        </Link>
+      </ListGroupItem>
+
+      <ListGroupItem className="border-0 bg-white text-center">
+        <Link
+          href="/labs"
+          id="wd-labs-link"
+          className="text-danger text-decoration-none"
+        >
+          <LiaCogSolid className="fs-1 text-danger" />
+          Labs
+        </Link>
+      </ListGroupItem>
     </ListGroup>
   );
 }
