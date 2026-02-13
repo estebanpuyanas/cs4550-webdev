@@ -21,10 +21,16 @@ import Spreader from './Spreader';
 import Destructing from './Destructing';
 import FunctionDestructing from './FunctionDestructing';
 import DestructingImports from './DestructingImports';
+import Classes from './Classes';
+import Styles from './Styles';
+import ClientComponentDemo from './ClientComponentDemo';
+import ServerComponentDemo from './ServerComponentDemo';
+import Add from './Add';
+import Square from './Square';
 
 export default function Lab3() {
   return (
-    <div>
+    <div id='wd-lab3' className='container'>
       <h2>Lab 3</h2>
       <VariableTypes />
       <IfElse />
@@ -49,6 +55,15 @@ export default function Lab3() {
       <Destructing />
       <FunctionDestructing />
       <DestructingImports />
+      <Classes />
+      <Styles />
+      <ClientComponentDemo />
+      <ServerComponentDemo />
+      <Add a={3} b={4} />
+
+      <h4>Square of 4</h4>
+      <Square>4</Square>
+      <hr />
     </div>
   );
 }
