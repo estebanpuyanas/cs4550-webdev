@@ -27,8 +27,14 @@ import ClientComponentDemo from './ClientComponentDemo';
 import ServerComponentDemo from './ServerComponentDemo';
 import Add from './Add';
 import Square from './Square';
+import Highlight from './HighLight';
+import PathParameters from './PathParameters';
+import TodoItem from './todos/TodoItem';
+import TodoList from './todos/TodoList';
 
 export default function Lab3() {
+  console.log('Hello world!');
+
   return (
     <div id='wd-lab3' className='container'>
       <h2>Lab 3</h2>
@@ -60,10 +66,16 @@ export default function Lab3() {
       <ClientComponentDemo />
       <ServerComponentDemo />
       <Add a={3} b={4} />
-
       <h4>Square of 4</h4>
       <Square>4</Square>
-      <hr />
+      <Highlight>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipitratione eaque illo minus
+        cum, saepe totam vel nihil repellat nemo explicabo excepturi consectetur. Modi omnis minus
+        sequi maiores, provident voluptates.
+      </Highlight>
+      <PathParameters />
+      <TodoItem />
+      <TodoList />
     </div>
   );
 }
