@@ -9,6 +9,8 @@ import ParentStateComponent from "./ParentStateComponent";
 import PassingDataOnEvent from "./PassingDataOnEvent";
 import PassingFunctions from "./PassingFunctions";
 import StringStateVariables from "./StringStateVariables";
+import store from "./store";
+import { Provider } from "react-redux";
 
 import Link from "next/link";
 
@@ -17,6 +19,7 @@ export default function Lab4() {
         alert("Hello");
     }
     return (
+        <Provider store={store}>
     <div id="wd-lab4" className="container">
             <h2>
                 Lab 4
@@ -34,5 +37,6 @@ export default function Lab4() {
 
             <Link href="./../lab4/redux/">Redux Examples</Link>
         </div>
+        </Provider>
     );
 }
