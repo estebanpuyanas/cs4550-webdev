@@ -43,3 +43,8 @@ from the creators of Next.js.
 Check out our
 [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying)
 for more details.
+
+# TODOS:
+1. check the client-side date time thing in ``lab4/page.tsx
+2. Implement react context todo list
+

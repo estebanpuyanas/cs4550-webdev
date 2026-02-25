@@ -23,7 +23,9 @@ function TodoListContent() {
 }
 
 export default function TodoList() {
-  <Provider store={store}>
-    <TodoListContent />
-  </Provider>;
+  return (
+    <Provider store={store}>
+      <TodoListContent />
+    </Provider>
+  );
 }

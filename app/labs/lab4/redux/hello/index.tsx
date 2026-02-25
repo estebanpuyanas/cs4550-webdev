@@ -14,7 +14,9 @@ function HelloReduxContent() {
 }
 
 export default function HelloRedux() {
-  <Provider store={store}>
-    <HelloReduxContent />
-  </Provider>;
+  return (
+    <Provider store={store}>
+      <HelloReduxContent />
+    </Provider>
+  );
 }

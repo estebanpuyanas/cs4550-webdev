@@ -38,9 +38,5 @@ function AddReduxContent() {
  * @returns JSX element.
  */
 export default function AddRedux() {
-  return (
-    <Provider store={store}>
-      <AddReduxContent />
-    </Provider>
-  );
+  return <AddReduxContent />;
 }

@@ -11,7 +11,6 @@ import PassingFunctions from './PassingFunctions';
 import StringStateVariables from './StringStateVariables';
 import store from './store';
 import { Provider } from 'react-redux';
-
 import Link from 'next/link';
 
 export default function Lab4() {
@@ -35,6 +34,8 @@ export default function Lab4() {
         <Link href='/labs/lab4/redux'>Redux Examples</Link>
         <hr />
         <Link href='/labs/lab4/react-context'>React context examples</Link>
+        <hr />
+        <Link href='/labs/lab4/zustand'>Zustand examples</Link>
       </div>
     </Provider>
   );
