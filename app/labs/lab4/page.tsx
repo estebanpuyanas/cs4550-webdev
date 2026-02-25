@@ -27,7 +27,7 @@ export default function Lab4() {
         <Counter />
         <BooleanStateVariables></BooleanStateVariables>
         <StringStateVariables></StringStateVariables>
-        <DateStateVariable>This needs to be fixed so make sure to check piazza</DateStateVariable>
+        <DateStateVariable></DateStateVariable>
         <ObjectStateVariable></ObjectStateVariable>
         <ArrayStateVariable></ArrayStateVariable>
         <ParentStateComponent></ParentStateComponent>
