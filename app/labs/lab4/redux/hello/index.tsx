@@ -1,6 +1,9 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../store';
-export default function HelloRedux() {
+'use client';
+import { useSelector } from 'react-redux';
+import store, { RootState } from '../../store';
+import { Provider } from 'react-redux';
+
+function HelloReduxContent() {
   const { message } = useSelector((state: RootState) => state.helloReducer);
   return (
     <div id='wd-hello-redux'>
@@ -8,4 +11,10 @@ export default function HelloRedux() {
       <h4>{message}</h4> <hr />
     </div>
   );
+}
+
+export default function HelloRedux() {
+  <Provider store={store}>
+    <HelloReduxContent />
+  </Provider>;
 }

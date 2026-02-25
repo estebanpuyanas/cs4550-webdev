@@ -1,8 +1,17 @@
+'use client';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { add } from './addReducer';
-import { RootState } from '../../store';
-export default function AddRedux() {
+import store, { RootState } from '../../store';
+import { Provider } from 'react-redux';
+import { FormControl, Button } from 'react-bootstrap';
+
+/**
+ * Hook logic here.
+ *
+ * @returns JSX element
+ */
+function AddReduxContent() {
   const [a, setA] = useState(12);
   const [b, setB] = useState(23);
   const { sum } = useSelector((state: RootState) => state.addReducer);
@@ -20,5 +29,18 @@ export default function AddRedux() {
       </Button>
       <hr />
     </div>
+  );
+}
+
+/**
+ * Wrapper for component above.
+ *
+ * @returns JSX element.
+ */
+export default function AddRedux() {
+  return (
+    <Provider store={store}>
+      <AddReduxContent />
+    </Provider>
   );
 }

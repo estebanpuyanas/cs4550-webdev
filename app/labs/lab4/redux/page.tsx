@@ -1,6 +1,7 @@
 import AddRedux from './AddRedux';
 import CounterRedux from './CounterRedux';
-import TodoList from './todos/TodoForm';
+import Hello from './hello';
+import TodoList from './todos/TodoList';
 export default function ReduxExamples() {
   return (
     <div>
@@ -8,6 +9,7 @@ export default function ReduxExamples() {
       {/* Not sure if this is the right way? Also, how do I import hello? */}
       <AddRedux />
       <CounterRedux />
+      <Hello />
       <TodoList />
     </div>
   );

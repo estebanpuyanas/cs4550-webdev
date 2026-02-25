@@ -1,10 +1,12 @@
+'use client';
 import { ListGroup } from 'react-bootstrap';
 import TodoForm from './TodoForm';
 import TodoItem from './TodoItem';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import store, { RootState } from '../../store';
+import { Provider } from 'react-redux';
 
-export default function TodoList() {
+function TodoListContent() {
   const { todos } = useSelector((state: RootState) => state.todosReducer);
   return (
     <div id='wd-todo-list-redux'>
@@ -18,4 +20,10 @@ export default function TodoList() {
       <hr />
     </div>
   );
+}
+
+export default function TodoList() {
+  <Provider store={store}>
+    <TodoListContent />
+  </Provider>;
 }
