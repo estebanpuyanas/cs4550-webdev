@@ -14,22 +14,22 @@ import {
   Form,
 } from 'react-bootstrap';
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewCourse, deleteCourse, updateCourse, setCourses } from '../courses/reducer';
 import { RootState } from '../store';
 
 export default function Dashboard() {
-  const [courses, setCourses] = useState<any[]>(db.courses);
+  const { courses } = useSelector((state: RootState) => state.coursesReducer);
+  const dispatch = useDispatch();
 
-  const [course, setCourse] = useState<any>({
+  const [course, setCourses] = useState<any>({
     _id: '0',
     name: 'New Course',
     number: 'New Number',
     startDate: '2023-09-10',
     endDate: '2023-12-15',
     image: '/images/reactjs.jpg',
-    description: 'New Description,
+    description: 'New Description',
   });
 
   return (
@@ -46,7 +46,7 @@ export default function Dashboard() {
         </button>
         <button
           className='btn btn-warning float-end me-2'
-          onClick={updateCourse}
+          onClick={() => dispatch(updateCourse(course))}
           id='wd-update-course-click'>
           Update{' '}
         </button>
@@ -55,13 +55,13 @@ export default function Dashboard() {
       <FormControl
         value={course.name}
         className='mb-2'
-        onChange={(e) => setCourse({ ...course, name: e.target.value })}
+        onChange={e => setCourse({ ...course, name: e.target.value })}
       />
       <Form.Control
         as='textarea'
         value={course.description}
         rows={3}
-        onChange={(e) => setCourse({ ...course, description: e.target.value })}
+        onChange={e => setCourse({ ...course, description: e.target.value })}
       />
       <hr />
       <h2 id='wd-dashboard-published'>Published Courses ({courses.length})</h2> <hr />
@@ -87,7 +87,7 @@ export default function Dashboard() {
                     <button
                       onClick={event => {
                         event.preventDefault();
-                        deleteCourse(course._id);
+                        dispatch(deleteCourse(course._id));
                       }}
                       className='btn btn-danger float-end'
                       id='wd-delete-course-click'>
