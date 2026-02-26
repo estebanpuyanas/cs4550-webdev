@@ -45,6 +45,5 @@ Check out our
 for more details.
 
 # TODOS:
-1. check the client-side date time thing in ``lab4/page.tsx
-2. Implement react context todo list
-
+1. Add more lessons/modules to each course as required.
+2. Implement course navigation sidebar toggling

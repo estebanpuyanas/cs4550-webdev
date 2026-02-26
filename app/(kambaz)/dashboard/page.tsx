@@ -55,13 +55,13 @@ export default function Dashboard() {
       <FormControl
         value={course.name}
         className='mb-2'
-        onChange={e => setCourse({ ...course, name: e.target.value })}
+        onChange={e => setCourses({ ...course, name: e.target.value })}
       />
       <Form.Control
         as='textarea'
         value={course.description}
         rows={3}
-        onChange={e => setCourse({ ...course, description: e.target.value })}
+        onChange={e => setCourses({ ...course, description: e.target.value })}
       />
       <hr />
       <h2 id='wd-dashboard-published'>Published Courses ({courses.length})</h2> <hr />
@@ -97,7 +97,7 @@ export default function Dashboard() {
                       id='wd-edit-course-click'
                       onClick={event => {
                         event.preventDefault();
-                        setCourse(course);
+                        setCourses(course);
                       }}
                       className='btn btn-warning me-2 float-end'>
                       Edit
