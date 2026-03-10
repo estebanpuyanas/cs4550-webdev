@@ -1,55 +1,71 @@
-import {
-  Button,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-} from "react-bootstrap";
-import { FaPlus } from "react-icons/fa6";
-import GreenCheckmark from "./GreenCheckmark";
-export default function ModulesControls() {
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'react-bootstrap';
+import { FaPlus } from 'react-icons/fa6';
+import GreenCheckmark from './GreenCheckmark';
+import ModuleEditor from './ModuleEditor';
+import { useState } from 'react';
+
+export default function ModulesControls({
+  moduleName,
+  setModuleName,
+  addModule,
+}: {
+  moduleName: string;
+  setModuleName: (title: string) => void;
+  addModule: () => void;
+}) {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div
-      id="wd-modules-controls"
-      className="d-flex align-items-center justify-content-end gap-2 flex-wrap"
-    >
-      <Button variant="secondary" size="lg" id="wd-collapse-all-btn">
+      id='wd-modules-controls'
+      className='d-flex align-items-center justify-content-end gap-2 flex-wrap'>
+      <Button variant='secondary' size='lg' id='wd-collapse-all-btn'>
         Collapse All
       </Button>
-      <Button variant="secondary" size="lg" id="wd-view-progress-btn">
+      <Button variant='secondary' size='lg' id='wd-view-progress-btn'>
         View Progress
       </Button>
       <Dropdown>
-        <DropdownToggle variant="secondary" size="lg" id="wd-publish-all-btn">
+        <DropdownToggle variant='secondary' size='lg' id='wd-publish-all-btn'>
           <GreenCheckmark /> Publish All
         </DropdownToggle>
         <DropdownMenu>
-          <DropdownItem id="wd-publish-all">
+          <DropdownItem id='wd-publish-all'>
             <GreenCheckmark /> Publish All
           </DropdownItem>
-          <DropdownItem id="wd-publish-all-modules-and-items">
+          <DropdownItem id='wd-publish-all-modules-and-items'>
             <GreenCheckmark /> Publish all modules and items
           </DropdownItem>
-          <DropdownItem id="wd-publish-modules-only">
+          <DropdownItem id='wd-publish-modules-only'>
             <GreenCheckmark /> Publish modules only
           </DropdownItem>
           {/* Create two more items with IDs wd-unpublish-all-modules-and-items and wd-unpublish-modules-only with
              labels Unpublish all modules and items and Unpublish modules only */}
-          <DropdownItem id="wd-unpublish-all-modules-and-items">
+          <DropdownItem id='wd-unpublish-all-modules-and-items'>
             <GreenCheckmark /> Unpublish all modules and items
           </DropdownItem>
-          <DropdownItem id="wd-unpublish-modules-only">
+          <DropdownItem id='wd-unpublish-modules-only'>
             <GreenCheckmark /> Unpublish modules only
           </DropdownItem>
-          <DropdownItem id="wd-unpublish-modules-only">
+          <DropdownItem id='wd-unpublish-modules-only'>
             <GreenCheckmark /> Unpublish modules only
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>
-      <Button variant="danger" size="lg" id="wd-add-module-btn">
-        <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
+      <Button variant='danger' onClick={handleShow}>
+        <FaPlus className='position-relative me-2' style={{ bottom: '1px' }} />
         Module
       </Button>
+      <ModuleEditor
+        show={show}
+        handleClose={handleClose}
+        dialogTitle='Add Module'
+        moduleName={moduleName}
+        setModuleName={setModuleName}
+        addModule={addModule}
+      />
     </div>
   );
 }

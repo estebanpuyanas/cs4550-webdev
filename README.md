@@ -43,3 +43,7 @@ from the creators of Next.js.
 Check out our
 [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying)
 for more details.
+
+# TODOS:
+1. Add more lessons/modules to each course as required.
+2. Implement course navigation sidebar toggling
