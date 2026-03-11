@@ -16,6 +16,8 @@ export default function Assignments() {
   const router = useRouter();
   const dispatch = useDispatch();
   const { assignments } = useSelector((state: RootState) => state.assignmentsReducer);
+  const { currentUser } = useSelector((state: RootState) => state.accountsReducer);
+  const isFaculty = currentUser?.role === 'FACULTY';
   const courseAssignments = assignments.filter((a: any) => a.course === cid);
 
   const handleDelete = (assignmentId: string, title: string) => {
@@ -38,14 +40,16 @@ export default function Assignments() {
           />
         </InputGroup>
 
-        <div className='d-flex gap-2'>
-          <Button variant='secondary'>
-            <BsPlus className='fs-4' /> Group
-          </Button>
-          <Button variant='danger' onClick={() => router.push(`/courses/${cid}/assignments/new`)}>
-            <BsPlus className='fs-4' /> Assignment
-          </Button>
-        </div>
+        {isFaculty && (
+          <div className='d-flex gap-2'>
+            <Button variant='secondary'>
+              <BsPlus className='fs-4' /> Group
+            </Button>
+            <Button variant='danger' onClick={() => router.push(`/courses/${cid}/assignments/new`)}>
+              <BsPlus className='fs-4' /> Assignment
+            </Button>
+          </div>
+        )}
       </div>
 
       <ListGroup className='rounded-0'>
@@ -90,11 +94,13 @@ export default function Assignments() {
               </div>
               <div className='d-flex align-items-center gap-2'>
                 <FaCheckCircle className='text-success fs-5' />
-                <FaTrash
-                  className='text-danger fs-5'
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => handleDelete(assignment._id, assignment.title)}
-                />
+                {isFaculty && (
+                  <FaTrash
+                    className='text-danger fs-5'
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => handleDelete(assignment._id, assignment.title)}
+                  />
+                )}
                 <IoEllipsisVertical className='fs-5' />
               </div>
             </div>

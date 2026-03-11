@@ -11,6 +11,8 @@ export default function AssignmentEditor() {
   const router = useRouter();
   const dispatch = useDispatch();
   const { assignments = [] } = useSelector((state: RootState) => state.assignmentsReducer);
+  const { currentUser } = useSelector((state: RootState) => state.accountsReducer);
+  const isFaculty = currentUser?.role === 'FACULTY';
 
   const isNew = aid === 'new';
   const existing = !isNew ? assignments.find((a: any) => a._id === aid) : null;
@@ -72,6 +74,7 @@ export default function AssignmentEditor() {
               id='wd-name'
               value={title}
               onChange={e => setTitle(e.target.value)}
+              disabled={!isFaculty}
             />
           </Form.Group>
 
@@ -85,6 +88,7 @@ export default function AssignmentEditor() {
               id='wd-description'
               value={description}
               onChange={e => setDescription(e.target.value)}
+              disabled={!isFaculty}
             />
           </Form.Group>
 
@@ -97,6 +101,7 @@ export default function AssignmentEditor() {
                   id='wd-points'
                   value={points}
                   onChange={e => setPoints(Number(e.target.value))}
+                  disabled={!isFaculty}
                 />
               </Form.Group>
             </Col>
@@ -104,7 +109,7 @@ export default function AssignmentEditor() {
 
           <Form.Group className='mb-3'>
             <Form.Label>Assignment Group</Form.Label>
-            <Form.Select id='wd-group-selector' defaultValue='Assignments'>
+            <Form.Select id='wd-group-selector' defaultValue='Assignments' disabled={!isFaculty}>
               <option value='Assignments'>ASSIGNMENTS</option>
               <option value='Quizzes'>QUIZZES</option>
               <option value='Exams'>EXAMS</option>
@@ -114,7 +119,7 @@ export default function AssignmentEditor() {
 
           <Form.Group className='mb-3'>
             <Form.Label>Display Grade As</Form.Label>
-            <Form.Select id='wd-grade-display-type' defaultValue='Percentage'>
+            <Form.Select id='wd-grade-display-type' defaultValue='Percentage' disabled={!isFaculty}>
               <option value='Percentage'>Percentage</option>
               <option value='Points'>Points</option>
               <option value='Fraction'>Fraction</option>
@@ -123,7 +128,7 @@ export default function AssignmentEditor() {
 
           <Form.Group className='mb-3'>
             <Form.Label>Submission Type</Form.Label>
-            <Form.Select id='wd-submission-type' defaultValue='Online'>
+            <Form.Select id='wd-submission-type' defaultValue='Online' disabled={!isFaculty}>
               <option value='Online'>Online</option>
               <option value='Physical'>Physical</option>
             </Form.Select>
@@ -134,21 +139,22 @@ export default function AssignmentEditor() {
               <b>Online Entry Options</b>
             </Form.Label>
             <div className='border p-3 rounded bg-light'>
-              <Form.Check type='checkbox' id='wd-chkbox-text-entry' label='Text Entry' />
-              <Form.Check type='checkbox' id='wd-chkbox-web-url' label='Web URL' defaultChecked />
-              <Form.Check type='checkbox' id='wd-chkbox-media-recording' label='Media Recording' />
+              <Form.Check type='checkbox' id='wd-chkbox-text-entry' label='Text Entry' disabled={!isFaculty} />
+              <Form.Check type='checkbox' id='wd-chkbox-web-url' label='Web URL' defaultChecked disabled={!isFaculty} />
+              <Form.Check type='checkbox' id='wd-chkbox-media-recording' label='Media Recording' disabled={!isFaculty} />
               <Form.Check
                 type='checkbox'
                 id='wd-chkbox-student-annotation'
                 label='Student Annotation'
+                disabled={!isFaculty}
               />
-              <Form.Check type='checkbox' id='wd-chkbox-file-upload' label='File Upload' />
+              <Form.Check type='checkbox' id='wd-chkbox-file-upload' label='File Upload' disabled={!isFaculty} />
             </div>
           </Form.Group>
 
           <Form.Group className='mb-3'>
             <Form.Label>Assign to</Form.Label>
-            <Form.Select id='wd-assign-to' defaultValue='Everyone'>
+            <Form.Select id='wd-assign-to' defaultValue='Everyone' disabled={!isFaculty}>
               <option value='Everyone'>Everyone</option>
               <option value='TAs'>TAs</option>
             </Form.Select>
@@ -163,6 +169,7 @@ export default function AssignmentEditor() {
               id='wd-due-date'
               value={dueDate}
               onChange={e => setDueDate(e.target.value)}
+              disabled={!isFaculty}
             />
           </Form.Group>
 
@@ -175,6 +182,7 @@ export default function AssignmentEditor() {
                   id='wd-available-from'
                   value={availableFrom}
                   onChange={e => setAvailableFrom(e.target.value)}
+                  disabled={!isFaculty}
                 />
               </Form.Group>
             </Col>
@@ -186,6 +194,7 @@ export default function AssignmentEditor() {
                   id='wd-available-until'
                   value={availableUntil}
                   onChange={e => setAvailableUntil(e.target.value)}
+                  disabled={!isFaculty}
                 />
               </Form.Group>
             </Col>
@@ -199,9 +208,11 @@ export default function AssignmentEditor() {
               id='wd-cancel-assignment'>
               Cancel
             </Button>
-            <Button variant='danger' type='button' onClick={handleSave} id='wd-save-assignment'>
-              Save
-            </Button>
+            {isFaculty && (
+              <Button variant='danger' type='button' onClick={handleSave} id='wd-save-assignment'>
+                Save
+              </Button>
+            )}
           </div>
         </Form>
       </Container>
