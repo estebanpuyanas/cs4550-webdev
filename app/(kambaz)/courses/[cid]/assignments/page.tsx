@@ -1,18 +1,28 @@
 'use client';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { BsGripVertical, BsPlus } from 'react-icons/bs';
 import { IoEllipsisVertical, IoSearchOutline } from 'react-icons/io5';
 import { LuNotebookPen } from 'react-icons/lu';
 import { ListGroup, ListGroupItem, Button, Form, InputGroup, Badge } from 'react-bootstrap';
 import InputGroupText from 'react-bootstrap/InputGroupText';
-import { FaCheckCircle } from 'react-icons/fa';
-import * as db from '../../../database';
+import { FaCheckCircle, FaTrash } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../../store';
+import { deleteAssignment } from './reducer';
 
 export default function Assignments() {
   const { cid } = useParams() as { cid: string };
-  const assignments = db.assignments;
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { assignments } = useSelector((state: RootState) => state.assignmentsReducer);
   const courseAssignments = assignments.filter((a: any) => a.course === cid);
+
+  const handleDelete = (assignmentId: string, title: string) => {
+    if (window.confirm(`Are you sure you want to remove "${title}"?`)) {
+      dispatch(deleteAssignment(assignmentId));
+    }
+  };
 
   return (
     <div id='wd-assignments'>
@@ -32,7 +42,7 @@ export default function Assignments() {
           <Button variant='secondary'>
             <BsPlus className='fs-4' /> Group
           </Button>
-          <Button variant='danger'>
+          <Button variant='danger' onClick={() => router.push(`/courses/${cid}/assignments/new`)}>
             <BsPlus className='fs-4' /> Assignment
           </Button>
         </div>
@@ -80,6 +90,11 @@ export default function Assignments() {
               </div>
               <div className='d-flex align-items-center gap-2'>
                 <FaCheckCircle className='text-success fs-5' />
+                <FaTrash
+                  className='text-danger fs-5'
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => handleDelete(assignment._id, assignment.title)}
+                />
                 <IoEllipsisVertical className='fs-5' />
               </div>
             </div>
