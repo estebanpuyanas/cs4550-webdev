@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormControl } from 'react-bootstrap';
+import { Form, FormControl } from 'react-bootstrap';
 
 const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER;
 
@@ -39,6 +39,34 @@ export default function WorkingWithObjects() {
         defaultValue={assignment.title}
         onChange={e => setAssignment({ ...assignment, title: e.target.value })}
       />
+      <hr />{' '}
+      <a
+        id='wd-update-assignment-score'
+        className='btn btn-primary float-end'
+        href={`${ASSIGNMENT_API_URL}/score/${assignment.score}`}>
+        Update Score{' '}
+      </a>
+      <FormControl
+        className='w-75'
+        id='wd-assignment-title'
+        defaultValue={assignment.score}
+        type='number'
+        onChange={e => setAssignment({ ...assignment, score: parseInt(e.target.value) })}
+      />
+      <hr />
+      <a
+        id='wd-update-assignment-completed'
+        className='btn btn-primary float-end'
+        href={`${ASSIGNMENT_API_URL}/completed/${assignment.completed}`}>
+        Update Completed{' '}
+      </a>
+      <Form.Check
+        id='wd-assignment-completed'
+        type='checkbox'
+        label='Completed'
+        checked={assignment.completed}
+        onChange={e => setAssignment({ ...assignment, completed: e.target.checked })}
+      />
       <hr />
       <h4>Retrieving Objects</h4>
       <a
@@ -66,16 +94,33 @@ export default function WorkingWithObjects() {
         className='btn btn-primary'
         href={`${HTTP_SERVER}/lab5/module/name`}>
         Get Module Name
+      </a>{' '}
+      <hr /> <h4>Updating Module Name</h4>
+      <a
+        id='wd-module-name'
+        className='btn btn-primary float-end'
+        href={`${MODULE_API_URL}/name/${module.name}`}>
+        Update Name{' '}
       </a>
-      <a id='wd-get-module' className='btn btn-primary' href={`${HTTP_SERVER}/lab5/module`}>
-        Get Module
-      </a>
-      <hr />{' '}
       <FormControl
         className='w-75'
         id='wd-module-name'
         defaultValue={module.name}
         onChange={e => setModule({ ...module, name: e.target.value })}
+      />
+      <hr />
+      <hr /> <h4>Updating Module Description</h4>
+      <a
+        id='wd-module-description'
+        className='btn btn-primary float-end'
+        href={`${MODULE_API_URL}/description/${module.description}`}>
+        Update Description{' '}
+      </a>
+      <FormControl
+        className='w-75'
+        id='wd-module-description'
+        defaultValue={module.description}
+        onChange={e => setModule({ ...module, description: e.target.value })}
       />
       <hr />
     </div>
