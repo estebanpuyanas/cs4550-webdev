@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormControl } from 'react-bootstrap';
+import { Form, FormControl } from 'react-bootstrap';
 
 const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER;
 
@@ -78,6 +78,45 @@ export default function WorkingWithArrays() {
       <br />
       <br />
       <hr />
+
+      <h3>Updating a TODO Item Description</h3>
+      <a
+        href={`${API}/${todo.id}/description/${todo.description}`}
+        className='btn btn-primary float-end'>
+        Update a TODO Description
+      </a>
+      <FormControl
+        defaultValue={todo.id}
+        className='w-25 float-start me-2'
+        onChange={e => setTodo({ ...todo, id: e.target.value })}
+      />
+      <FormControl
+        defaultValue={todo.description}
+        className='w-25 float-start me-2'
+        onChange={e => setTodo({ ...todo, description: e.target.value })}
+      />
+      <br />
+      <hr />
+      <h3>Updating a TODO Item Completion Status</h3>
+      <a
+        href={`${API}/${todo.id}/completed/${todo.completed}`}
+        className='btn btn-primary float-end'>
+        Update a TODO Completion Status
+      </a>
+      <FormControl
+        defaultValue={todo.id}
+        className='w-25 float-start me-2'
+        onChange={e => setTodo({ ...todo, id: e.target.value })}
+      />
+      <hr />
+      <hr />
+      <Form.Check
+        id='wd-assignment-completed'
+        type='checkbox'
+        label='Completed'
+        checked={todo.completed}
+        onChange={e => setTodo({ ...todo, completed: e.target.checked })}
+      />
     </div>
   );
 }
