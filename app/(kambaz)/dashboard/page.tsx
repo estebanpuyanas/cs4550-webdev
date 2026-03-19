@@ -14,9 +14,11 @@ import {
 } from 'react-bootstrap';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNewCourse, deleteCourse, updateCourse } from '../courses/reducer';
+import { addNewCourse, deleteCourse, updateCourse, setCourses } from '../courses/reducer';
 import { enroll, unenroll } from '../enrollments/reducer';
 import { RootState } from '../store';
+import * as client from '../courses/client';
+import { useEffect } from 'react';
 
 export default function Dashboard() {
   const { courses } = useSelector((state: RootState) => state.coursesReducer);
@@ -39,12 +41,22 @@ export default function Dashboard() {
     description: 'New Description',
   });
 
+  const fetchCourses = async () => {
+    try {
+      const courses = await client.findMyCourses();
+      dispatch(setCourses(courses));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchCourses();
+  }, [currentUser]);
+
   const isEnrolled = (courseId: string) =>
     enrollments.some((e: any) => e.user === currentUser?._id && e.course === courseId);
 
-  const visibleCourses = showAllCourses
-    ? courses
-    : courses.filter(c => isEnrolled(c._id));
+  const visibleCourses = showAllCourses ? courses : courses.filter(c => isEnrolled(c._id));
 
   return (
     <div id='wd-dashboard'>
