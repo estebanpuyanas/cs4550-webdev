@@ -49,6 +49,32 @@ export default function Dashboard() {
       console.error(error);
     }
   };
+
+  const onAddNewCourse = async () => {
+    const newCourse = await client.createCourse(course);
+    dispatch(setCourses([...courses, newCourse]));
+  };
+
+  const onDeleteCourse = async (courseId: string) => {
+    const status = await client.deleteCourse(courseId);
+    dispatch(setCourses(courses.filter(course => course._id !== courseId)));
+  };
+
+  const onUpdateCourse = async () => {
+    await client.updateCourse(course);
+    dispatch(
+      setCourses(
+        courses.map(c => {
+          if (c._id === course._id) {
+            return course;
+          } else {
+            return c;
+          }
+        }),
+      ),
+    );
+  };
+
   useEffect(() => {
     fetchCourses();
   }, [currentUser]);
@@ -60,6 +86,12 @@ export default function Dashboard() {
 
   return (
     <div id='wd-dashboard'>
+      <button
+        onClick={onAddNewCourse}
+        className='btn btn-primary float-end'
+        id='wd-add-new-course-click'>
+        Add
+      </button>
       <div className='d-flex justify-content-between align-items-center'>
         <h1 id='wd-dashboard-title'>Dashboard</h1>
         <Button variant='primary' onClick={() => setShowAllCourses(prev => !prev)}>
@@ -80,7 +112,7 @@ export default function Dashboard() {
             </button>
             <button
               className='btn btn-warning float-end me-2'
-              onClick={() => dispatch(updateCourse(course))}
+              onClick={onUpdateCourse}
               id='wd-update-course-click'>
               Update
             </button>
@@ -128,7 +160,7 @@ export default function Dashboard() {
                         <button
                           onClick={event => {
                             event.preventDefault();
-                            dispatch(deleteCourse(course._id));
+                            onDeleteCourse(course._id);
                           }}
                           className='btn btn-danger float-end'
                           id='wd-delete-course-click'>
