@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { RootState } from '../../../../store';
 import { addAssignment, updateAssignment } from '../reducer';
+import * as client from '../client';
 
 export default function AssignmentEditor() {
   const { cid, aid } = useParams() as { cid: string; aid: string };
@@ -28,31 +29,29 @@ export default function AssignmentEditor() {
     return <div className='p-4'>Assignment not found.</div>;
   }
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (isNew) {
-      dispatch(
-        addAssignment({
-          course: cid,
-          title,
-          description,
-          points,
-          dueDate,
-          availableFrom,
-          availableUntil,
-        }),
-      );
+      const newAssignment = await client.createAssignment(cid, {
+        course: cid,
+        title,
+        description,
+        points,
+        dueDate,
+        availableFrom,
+        availableUntil,
+      });
+      dispatch(addAssignment(newAssignment));
     } else {
-      dispatch(
-        updateAssignment({
-          ...existing,
-          title,
-          description,
-          points,
-          dueDate,
-          availableFrom,
-          availableUntil,
-        }),
-      );
+      const updated = await client.updateAssignment({
+        ...existing,
+        title,
+        description,
+        points,
+        dueDate,
+        availableFrom,
+        availableUntil,
+      });
+      dispatch(updateAssignment(updated));
     }
     router.push(`/courses/${cid}/assignments`);
   };
