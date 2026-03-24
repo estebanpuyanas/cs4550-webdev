@@ -14,7 +14,7 @@ import {
 } from 'react-bootstrap';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNewCourse, deleteCourse, updateCourse, setCourses } from '../courses/reducer';
+import { setCourses } from '../courses/reducer';
 import { enroll, unenroll } from '../enrollments/reducer';
 import { RootState } from '../store';
 import * as client from '../courses/client';
@@ -86,12 +86,6 @@ export default function Dashboard() {
 
   return (
     <div id='wd-dashboard'>
-      <button
-        onClick={onAddNewCourse}
-        className='btn btn-primary float-end'
-        id='wd-add-new-course-click'>
-        Add
-      </button>
       <div className='d-flex justify-content-between align-items-center'>
         <h1 id='wd-dashboard-title'>Dashboard</h1>
         <Button variant='primary' onClick={() => setShowAllCourses(prev => !prev)}>
@@ -107,12 +101,13 @@ export default function Dashboard() {
             <button
               className='btn btn-primary float-end'
               id='wd-add-new-course-click'
-              onClick={() => dispatch(addNewCourse(course))}>
+              onClick={onAddNewCourse}>
               Add
             </button>
             <button
               className='btn btn-warning float-end me-2'
               onClick={onUpdateCourse}
+              disabled={course._id === '0'}
               id='wd-update-course-click'>
               Update
             </button>
