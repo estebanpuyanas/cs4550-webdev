@@ -8,8 +8,10 @@ import { ListGroup, ListGroupItem, Button, Form, InputGroup, Badge } from 'react
 import InputGroupText from 'react-bootstrap/InputGroupText';
 import { FaCheckCircle, FaTrash } from 'react-icons/fa';
 import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import { RootState } from '../../../store';
-import { deleteAssignment } from './reducer';
+import { setAssignments, deleteAssignment } from './reducer';
+import * as client from './client';
 
 export default function Assignments() {
   const { cid } = useParams() as { cid: string };
@@ -20,8 +22,18 @@ export default function Assignments() {
   const isFaculty = currentUser?.role === 'FACULTY';
   const courseAssignments = assignments.filter((a: any) => a.course === cid);
 
-  const handleDelete = (assignmentId: string, title: string) => {
+  const fetchAssignments = async () => {
+    const data = await client.findAssignmentsForCourse(cid);
+    dispatch(setAssignments(data));
+  };
+
+  useEffect(() => {
+    fetchAssignments();
+  }, [cid]);
+
+  const handleDelete = async (assignmentId: string, title: string) => {
     if (window.confirm(`Are you sure you want to remove "${title}"?`)) {
+      await client.deleteAssignment(assignmentId);
       dispatch(deleteAssignment(assignmentId));
     }
   };

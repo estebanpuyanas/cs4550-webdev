@@ -2,6 +2,7 @@
 import { Nav, NavItem, NavLink } from 'react-bootstrap';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
 export default function TOC() {
   const pathname = usePathname();
   return (
@@ -44,6 +45,14 @@ export default function TOC() {
           as={Link}
           className={`nav-link ${pathname.endsWith('lab4') ? 'active' : ''}`}>
           Lab 4{' '}
+        </NavLink>{' '}
+      </NavItem>
+      <NavItem>
+        <NavLink
+          href='/labs/lab5'
+          as={Link}
+          className={`nav-link ${pathname.endsWith('lab5') ? 'active' : ''}`}>
+          Lab 5{' '}
         </NavLink>{' '}
       </NavItem>
       <NavItem>
