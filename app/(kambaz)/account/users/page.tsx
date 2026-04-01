@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import { FaPlus } from 'react-icons/fa';
 import { FormControl } from 'react-bootstrap';
 import PeopleTable from '../../courses/[cid]/people/Table';
 import * as client from '../client';
@@ -36,12 +37,29 @@ export default function Users() {
     }
   };
 
+  const createUser = async () => {
+    const user = await client.createUser({
+      firstName: 'New',
+      lastName: `User${users.length + 1}`,
+      username: `newuser${Date.now()}`,
+      password: 'password123',
+      email: `email${users.length + 1}@neu.edu`,
+      section: 'S101',
+      role: 'STUDENT',
+    });
+    setUsers([...users, user]);
+  };
+
   useEffect(() => {
     fetchUsers();
   }, [uid]);
 
   return (
     <div>
+      <button onClick={createUser} className='float-end btn btn-danger wd-add-people'>
+        <FaPlus className='me-2' />
+        Users
+      </button>
       <h3>Users</h3>
       <FormControl
         onChange={e => filterUsersByName(e.target.value)}
