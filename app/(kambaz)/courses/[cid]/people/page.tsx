@@ -1,3 +1,4 @@
+'use client';
 import PeopleTable from './Table';
 
 export default function PeoplePage() {
