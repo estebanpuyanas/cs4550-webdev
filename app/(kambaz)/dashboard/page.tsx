@@ -78,11 +78,7 @@ export default function Dashboard() {
 
   const onUpdateCourse = async () => {
     await coursesClient.updateCourse(course);
-    dispatch(
-      setCourses(
-        courses.map((c: any) => (c._id === course._id ? course : c)),
-      ),
-    );
+    dispatch(setCourses(courses.map((c: any) => (c._id === course._id ? course : c))));
   };
 
   const isEnrolled = (courseId: string) =>
