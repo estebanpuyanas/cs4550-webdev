@@ -20,7 +20,7 @@ export default function Assignments() {
   const { assignments } = useSelector((state: RootState) => state.assignmentsReducer);
   const { currentUser } = useSelector((state: RootState) => state.accountsReducer);
   const isFaculty = currentUser?.role === 'FACULTY';
-  const courseAssignments = assignments.filter((a: any) => a.course === cid);
+  const courseAssignments = assignments;
 
   const fetchAssignments = async () => {
     const data = await client.findAssignmentsForCourse(cid);
