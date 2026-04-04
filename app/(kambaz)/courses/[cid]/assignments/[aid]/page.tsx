@@ -2,9 +2,9 @@
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useParams, useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { RootState } from '../../../../store';
-import { addAssignment, updateAssignment } from '../reducer';
+import { addAssignment, updateAssignment, setAssignments } from '../reducer';
 import * as client from '../client';
 
 export default function AssignmentEditor() {
@@ -16,17 +16,42 @@ export default function AssignmentEditor() {
   const isFaculty = currentUser?.role === 'FACULTY';
 
   const isNew = aid === 'new';
-  const existing = !isNew ? assignments.find((a: any) => a._id === aid) : null;
 
-  const [title, setTitle] = useState(existing?.title ?? '');
-  const [description, setDescription] = useState(existing?.description ?? '');
-  const [points, setPoints] = useState<number>(existing?.points ?? 100);
-  const [dueDate, setDueDate] = useState(existing?.dueDate ?? '');
-  const [availableFrom, setAvailableFrom] = useState(existing?.availableFrom ?? '');
-  const [availableUntil, setAvailableUntil] = useState(existing?.availableUntil ?? '');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [points, setPoints] = useState<number>(100);
+  const [dueDate, setDueDate] = useState('');
+  const [availableFrom, setAvailableFrom] = useState('');
+  const [availableUntil, setAvailableUntil] = useState('');
+  const [loaded, setLoaded] = useState(isNew);
 
-  if (!isNew && !existing) {
-    return <div className='p-4'>Assignment not found.</div>;
+  useEffect(() => {
+    if (isNew) return;
+    const fromStore = assignments.find((a: any) => a._id === aid);
+    if (fromStore) {
+      populate(fromStore);
+      setLoaded(true);
+    } else {
+      client.findAssignmentsForCourse(cid).then((data) => {
+        dispatch(setAssignments(data));
+        const found = data.find((a: any) => a._id === aid);
+        if (found) populate(found);
+        setLoaded(true);
+      });
+    }
+  }, [aid]);
+
+  function populate(a: any) {
+    setTitle(a.title ?? '');
+    setDescription(a.description ?? '');
+    setPoints(a.points ?? 100);
+    setDueDate(a.dueDate ?? '');
+    setAvailableFrom(a.availableFrom ?? '');
+    setAvailableUntil(a.availableUntil ?? '');
+  }
+
+  if (!loaded) {
+    return <div className='p-4'>Loading...</div>;
   }
 
   const handleSave = async () => {
@@ -43,7 +68,8 @@ export default function AssignmentEditor() {
       dispatch(addAssignment(newAssignment));
     } else {
       const updated = await client.updateAssignment({
-        ...existing,
+        _id: aid,
+        course: cid,
         title,
         description,
         points,
