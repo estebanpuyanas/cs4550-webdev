@@ -41,13 +41,8 @@ export default function ModulesControls({
           <DropdownItem id='wd-publish-modules-only'>
             <GreenCheckmark /> Publish modules only
           </DropdownItem>
-          {/* Create two more items with IDs wd-unpublish-all-modules-and-items and wd-unpublish-modules-only with
-             labels Unpublish all modules and items and Unpublish modules only */}
           <DropdownItem id='wd-unpublish-all-modules-and-items'>
             <GreenCheckmark /> Unpublish all modules and items
-          </DropdownItem>
-          <DropdownItem id='wd-unpublish-modules-only'>
-            <GreenCheckmark /> Unpublish modules only
           </DropdownItem>
           <DropdownItem id='wd-unpublish-modules-only'>
             <GreenCheckmark /> Unpublish modules only

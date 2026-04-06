@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as client from './client';
-import axios from 'axios';
 
 const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER;
 

@@ -5,7 +5,6 @@ import { setCurrentUser } from '../reducer';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import * as client from '../client';
-import * as db from '../../database';
 import { FormControl } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 

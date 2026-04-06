@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Form, FormControl } from 'react-bootstrap';
 
 const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER;
