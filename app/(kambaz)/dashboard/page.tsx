@@ -94,7 +94,8 @@ export default function Dashboard() {
     dispatch(unenroll({ userId: currentUser._id, courseId }));
   };
 
-  const visibleCourses = showAllCourses ? courses : courses.filter((c: any) => isEnrolled(c._id));
+  const visibleCourses =
+    isFaculty || showAllCourses ? courses : courses.filter((c: any) => isEnrolled(c._id));
 
   return (
     <div id='wd-dashboard'>
@@ -145,7 +146,7 @@ export default function Dashboard() {
       <div id='wd-dashboard-courses'>
         <Row xs={1} md={5} className='g-4'>
           {visibleCourses.map((course: any) => (
-            <Col key={course._id} className='wd-dashboard-course' style={{ width: '300px' }}>
+            <Col key={course._id} className='wd-dashboard-course' style={{ width: '380px' }}>
               <Card>
                 <Link
                   href={`/courses/${course._id}/home`}
@@ -160,48 +161,49 @@ export default function Dashboard() {
                       style={{ height: '100px' }}>
                       {course.description}
                     </CardText>
-                    <Button variant='primary'>Go</Button>
-
-                    {isFaculty ? (
-                      <>
+                    <div className='d-flex gap-2 mt-2'>
+                      <Button variant='primary'>Go</Button>
+                      {isFaculty ? (
+                        <>
+                          <button
+                            id='wd-edit-course-click'
+                            onClick={event => {
+                              event.preventDefault();
+                              setCourse(course);
+                            }}
+                            className='btn btn-warning'>
+                            Edit
+                          </button>
+                          <button
+                            onClick={event => {
+                              event.preventDefault();
+                              onDeleteCourse(course._id);
+                            }}
+                            className='btn btn-danger'
+                            id='wd-delete-course-click'>
+                            Delete
+                          </button>
+                        </>
+                      ) : isEnrolled(course._id) ? (
                         <button
                           onClick={event => {
                             event.preventDefault();
-                            onDeleteCourse(course._id);
+                            onUnenroll(course._id);
                           }}
-                          className='btn btn-danger float-end'
-                          id='wd-delete-course-click'>
-                          Delete
+                          className='btn btn-danger'>
+                          Unenroll
                         </button>
+                      ) : (
                         <button
-                          id='wd-edit-course-click'
                           onClick={event => {
                             event.preventDefault();
-                            setCourse(course);
+                            onEnroll(course._id);
                           }}
-                          className='btn btn-warning me-2 float-end'>
-                          Edit
+                          className='btn btn-success'>
+                          Enroll
                         </button>
-                      </>
-                    ) : isEnrolled(course._id) ? (
-                      <button
-                        onClick={event => {
-                          event.preventDefault();
-                          onUnenroll(course._id);
-                        }}
-                        className='btn btn-danger float-end'>
-                        Unenroll
-                      </button>
-                    ) : (
-                      <button
-                        onClick={event => {
-                          event.preventDefault();
-                          onEnroll(course._id);
-                        }}
-                        className='btn btn-success float-end'>
-                        Enroll
-                      </button>
-                    )}
+                      )}
+                    </div>
                   </CardBody>
                 </Link>
               </Card>

@@ -17,7 +17,7 @@ export default function AccountNavigation() {
   return (
     <Nav variant='pills'>
       {currentUser && currentUser.role === 'ADMIN' && (
-        <NavLink as={Link} href={`/account/users`} active={pathname.endsWith('Users')}>
+        <NavLink as={Link} href={`/account/users`} active={pathname.endsWith('users')}>
           {' '}
           Users{' '}
         </NavLink>
