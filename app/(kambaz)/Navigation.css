@@ -44,10 +44,9 @@
   justify-content: center;
   text-decoration: none !important;
   color: rgba(255, 255, 255, 0.44) !important;
-  font-size: 0.66rem;
+  font-size: 0.68rem;
   font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   gap: 4px;
   padding: 9px 6px;
   margin: 0 8px;

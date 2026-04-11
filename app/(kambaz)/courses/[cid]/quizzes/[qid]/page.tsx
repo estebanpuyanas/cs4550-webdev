@@ -119,9 +119,9 @@ export default function QuizDetails() {
 
   return (
     <div id='wd-quiz-details' className='p-4'>
-      <div className='d-flex justify-content-between align-items-start mb-3'>
-        <h3>{quiz.title}</h3>
-        <div className='d-flex gap-2'>
+      <div className='d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2'>
+        <h3 className='mb-0' style={{ minWidth: 0 }}>{quiz.title}</h3>
+        <div className='d-flex gap-2 flex-shrink-0 flex-wrap'>
           <Button
             variant={quiz.published ? 'success' : 'secondary'}
             onClick={handlePublishToggle}

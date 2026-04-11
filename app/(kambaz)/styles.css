@@ -214,6 +214,13 @@ h6 {
   transform: translateY(-1px);
 }
 
+/* ── Button icon alignment ── */
+.btn svg,
+.btn .svg-inline--fa {
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
 .form-control {
   border-color: var(--k-border);
   border-radius: var(--k-r-sm);

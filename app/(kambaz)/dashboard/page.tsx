@@ -157,7 +157,7 @@ export default function Dashboard() {
                       {c.description}
                     </div>
                     <div className='course-card-actions'>
-                      <Button variant='danger' size='sm'>
+                      <Button variant='outline-secondary' size='sm'>
                         Go
                       </Button>
                       {isFaculty ? (
@@ -176,7 +176,7 @@ export default function Dashboard() {
                               event.preventDefault();
                               onDeleteCourse(c._id);
                             }}
-                            className='btn btn-outline-secondary btn-sm'
+                            className='btn btn-danger btn-sm'
                             id='wd-delete-course-click'>
                             Delete
                           </button>
@@ -187,7 +187,7 @@ export default function Dashboard() {
                             event.preventDefault();
                             onUnenroll(c._id);
                           }}
-                          className='btn btn-outline-secondary btn-sm'>
+                          className='btn btn-danger btn-sm'>
                           Unenroll
                         </button>
                       ) : (
