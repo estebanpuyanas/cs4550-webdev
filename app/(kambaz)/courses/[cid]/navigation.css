@@ -1,0 +1,49 @@
+/* ═══════════════════════════════════════════════
+   Kambaz  ·  Course Sidebar Navigation
+   ═══════════════════════════════════════════════ */
+
+#wd-courses-navigation {
+  min-width: 175px;
+  width: 175px;
+  background: var(--k-card);
+  border: 1px solid var(--k-border);
+  border-radius: var(--k-r);
+  padding: 6px 0;
+  box-shadow: var(--k-shadow-xs);
+  align-self: flex-start;
+  position: sticky;
+  top: 16px;
+  font-size: 0.875rem;
+}
+
+#wd-courses-navigation .list-group-item {
+  background: transparent !important;
+  border: none !important;
+  border-left: 3px solid transparent !important;
+  border-radius: 0 !important;
+  padding: 9px 16px !important;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--k-text-sub) !important;
+  text-decoration: none;
+  transition: color var(--k-t-fast), background var(--k-t-fast), border-color var(--k-t-fast);
+  display: block;
+}
+
+#wd-courses-navigation .list-group-item:hover:not(.active) {
+  color: var(--k-text) !important;
+  background: var(--k-surface) !important;
+  border-left-color: var(--k-border-strong) !important;
+}
+
+#wd-courses-navigation .list-group-item.active {
+  color: var(--k-crimson) !important;
+  background: var(--k-crimson-soft) !important;
+  border-left-color: var(--k-crimson) !important;
+  font-weight: 600;
+}
+
+/* Remove the fs-5 override from the outer container */
+#wd-courses-navigation.fs-5 {
+  font-size: inherit !important;
+}

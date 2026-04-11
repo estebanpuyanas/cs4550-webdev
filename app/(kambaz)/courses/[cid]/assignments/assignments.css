@@ -1,0 +1,128 @@
+#wd-assignments {
+  padding-top: 4px;
+}
+
+.assignment-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px !important;
+  background: var(--k-surface-alt) !important;
+  border: 1px solid var(--k-border) !important;
+  border-bottom: none !important;
+  border-radius: var(--k-r) var(--k-r) 0 0 !important;
+}
+
+.assignment-section-header-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--k-text-sub);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.assignment-section-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.assignment-list {
+  border: 1px solid var(--k-border) !important;
+  border-radius: 0 0 var(--k-r) var(--k-r) !important;
+  overflow: hidden;
+  box-shadow: var(--k-shadow-xs);
+}
+
+.assignment-item {
+  border: none !important;
+  border-left: 4px solid var(--k-emerald) !important;
+  border-bottom: 1px solid var(--k-border) !important;
+  border-radius: 0 !important;
+  padding: 14px 16px !important;
+  background: var(--k-card) !important;
+  transition: background var(--k-t-fast);
+}
+
+.assignment-item:last-child {
+  border-bottom: none !important;
+}
+
+.assignment-item:hover {
+  background: var(--k-surface) !important;
+}
+
+.assignment-item-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.assignment-item-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.assignment-item-grip {
+  color: var(--k-border-strong);
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+  cursor: grab;
+  transition: color var(--k-t-fast);
+}
+
+.assignment-item:hover .assignment-item-grip {
+  color: var(--k-text-muted);
+}
+
+.assignment-item-icon {
+  color: var(--k-emerald);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.assignment-item-body {
+  min-width: 0;
+}
+
+.assignment-item-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--k-text);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 3px;
+  transition: color var(--k-t-fast);
+}
+
+.assignment-item-title:hover {
+  color: var(--k-crimson);
+  text-decoration: none;
+}
+
+.assignment-item-meta {
+  font-size: 0.78rem;
+  color: var(--k-text-muted);
+  line-height: 1.5;
+}
+
+.assignment-meta-modules {
+  color: var(--k-crimson);
+  font-weight: 500;
+}
+
+.assignment-item-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}

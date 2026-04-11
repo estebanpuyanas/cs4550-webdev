@@ -1,11 +1,12 @@
 'use client';
+import './quizzes.css';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { BsGripVertical, BsPlus } from 'react-icons/bs';
 import { IoEllipsisVertical, IoSearchOutline } from 'react-icons/io5';
 import { LuClipboardList } from 'react-icons/lu';
 import { FaCheckCircle, FaBan } from 'react-icons/fa';
-import { ListGroup, ListGroupItem, Button, Form, InputGroup, Dropdown } from 'react-bootstrap';
+import { Form, InputGroup, Button, Dropdown } from 'react-bootstrap';
 import InputGroupText from 'react-bootstrap/InputGroupText';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -60,80 +61,85 @@ export default function Quizzes() {
     const now = new Date();
     const from = quiz.availableFrom ? new Date(quiz.availableFrom) : null;
     const until = quiz.availableUntil ? new Date(quiz.availableUntil) : null;
-    if (until && now > until) return <span className='text-danger fw-bold'>Closed</span>;
+    if (until && now > until) return <span className='quiz-meta-closed'>Closed</span>;
     if (from && now < from)
       return (
-        <>
-          <strong>Not available until</strong> {quiz.availableFrom}
-        </>
+        <span className='quiz-meta-not-available'>
+          Not available until {quiz.availableFrom}
+        </span>
       );
-    return <span className='text-success fw-bold'>Available</span>;
+    return <span className='quiz-meta-available'>Available</span>;
   };
 
   return (
     <div id='wd-quizzes'>
-      <div className='d-flex justify-content-between align-items-center mb-3'>
-        <InputGroup style={{ width: '300px' }}>
-          <InputGroupText className='bg-white'>
+      <div className='quiz-toolbar'>
+        <InputGroup style={{ width: '280px' }}>
+          <InputGroupText>
             <IoSearchOutline />
           </InputGroupText>
-          <Form.Control type='text' placeholder='Search for Quiz' className='border-start-0' />
+          <Form.Control type='text' placeholder='Search quizzes…' className='border-start-0' />
         </InputGroup>
-
         {isFaculty && (
           <Button variant='danger' onClick={handleAddQuiz}>
-            <BsPlus className='fs-4' /> Quiz
+            <BsPlus className='fs-5' /> Quiz
           </Button>
         )}
       </div>
 
-      <ListGroup className='rounded-0'>
-        <ListGroupItem className='p-3 ps-2 bg-secondary border-secondary'>
-          <div className='d-flex justify-content-between align-items-center'>
-            <div>
-              <BsGripVertical className='me-2 fs-3' />
-              <strong>QUIZZES</strong>
-            </div>
-            <div>
-              <BsPlus className='fs-4' />
-              <IoEllipsisVertical className='fs-5' />
-            </div>
-          </div>
-        </ListGroupItem>
+      <div className='quiz-section-header'>
+        <div className='quiz-section-header-label'>
+          <BsGripVertical />
+          Quizzes
+        </div>
+        <div className='quiz-section-header-actions'>
+          <BsPlus style={{ fontSize: '1.2rem' }} />
+          <IoEllipsisVertical />
+        </div>
+      </div>
 
+      <div className='quiz-list'>
         {visibleQuizzes.map((quiz: any) => (
-          <ListGroupItem
-            key={quiz._id}
-            className='p-3 ps-1 border-start border-success border-5 border-top-0 border-end-0 border-bottom-0'>
-            <div className='d-flex justify-content-between align-items-center'>
-              <div className='d-flex align-items-start'>
-                <BsGripVertical className='me-2 fs-3 text-secondary' />
-                <LuClipboardList className='me-2 fs-4 text-success mt-1' />
-                <div className='ms-2'>
+          <div key={quiz._id} className='quiz-item'>
+            <div className='quiz-item-inner'>
+              <div className='quiz-item-left'>
+                <BsGripVertical className='quiz-item-grip' />
+                <LuClipboardList className='quiz-item-icon' />
+                <div className='quiz-item-body'>
                   <Link
                     href={`/courses/${cid}/quizzes/${quiz._id}`}
-                    className='text-dark text-decoration-none fw-bold'>
+                    className='quiz-item-title'>
                     {quiz.title}
                   </Link>
-                  <div className='text-muted small'>
-                    {availabilityLabel(quiz)} | <strong>Due</strong> {quiz.dueDate || 'No due date'}{' '}
-                    | {quiz.points} pts | {quiz.questions?.length ?? 0} Questions
+                  <div className='quiz-item-meta'>
+                    {availabilityLabel(quiz)}
+                    <span className='quiz-item-meta-sep'>·</span>
+                    <span>
+                      <strong>Due</strong> {quiz.dueDate || 'No due date'}
+                    </span>
+                    <span className='quiz-item-meta-sep'>·</span>
+                    <span>{quiz.points} pts</span>
+                    <span className='quiz-item-meta-sep'>·</span>
+                    <span>{quiz.questions?.length ?? 0} Q</span>
                   </div>
                 </div>
               </div>
 
-              <div className='d-flex align-items-center gap-3'>
+              <div className='quiz-item-right'>
                 {quiz.published ? (
                   <FaCheckCircle
-                    className='text-success fs-5'
+                    className='quiz-publish-icon text-success'
                     style={{ cursor: isFaculty ? 'pointer' : 'default' }}
                     onClick={() => isFaculty && handlePublishToggle(quiz)}
                     title='Published – click to unpublish'
                   />
                 ) : (
                   <FaBan
-                    className='text-secondary fs-5'
-                    style={{ cursor: isFaculty ? 'pointer' : 'default' }}
+                    className='quiz-publish-icon'
+                    style={{
+                      cursor: isFaculty ? 'pointer' : 'default',
+                      color: 'var(--k-border-strong)',
+                    }}
                     onClick={() => isFaculty && handlePublishToggle(quiz)}
                     title='Unpublished – click to publish'
                   />
@@ -142,15 +148,15 @@ export default function Quizzes() {
                 {isFaculty && (
                   <Dropdown align='end'>
                     <Dropdown.Toggle
-                      variant='white'
                       id={`quiz-menu-${quiz._id}`}
-                      className='border-0 p-0 text-dark'
-                      style={{ boxShadow: 'none' }}>
-                      <IoEllipsisVertical className='fs-5' />
+                      className='quiz-menu-toggle'>
+                      <IoEllipsisVertical />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Dropdown.Item
-                        onClick={() => router.push(`/courses/${cid}/quizzes/${quiz._id}/edit`)}>
+                        onClick={() =>
+                          router.push(`/courses/${cid}/quizzes/${quiz._id}/edit`)
+                        }>
                         Edit
                       </Dropdown.Item>
                       <Dropdown.Item onClick={() => handlePublishToggle(quiz)}>
@@ -166,9 +172,9 @@ export default function Quizzes() {
                 )}
               </div>
             </div>
-          </ListGroupItem>
+          </div>
         ))}
-      </ListGroup>
+      </div>
     </div>
   );
 }

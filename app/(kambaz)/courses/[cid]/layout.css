@@ -1,0 +1,69 @@
+/* ═══════════════════════════════════════════════
+   Kambaz  ·  Course Layout Header
+   ═══════════════════════════════════════════════ */
+
+#wd-courses {
+  padding: 0;
+}
+
+.course-layout-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px 12px;
+  background: var(--k-card);
+  border-bottom: 1px solid var(--k-border);
+  box-shadow: var(--k-shadow-xs);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.course-layout-toggle {
+  color: var(--k-crimson);
+  cursor: pointer;
+  font-size: 1rem;
+  flex-shrink: 0;
+  transition: opacity var(--k-t-fast);
+  display: flex;
+  align-items: center;
+}
+.course-layout-toggle:hover {
+  opacity: 0.7;
+}
+
+.course-layout-name {
+  font-family: var(--k-font-display);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--k-crimson);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.course-layout-breadcrumb {
+  font-size: 0.875rem;
+  color: var(--k-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.course-layout-breadcrumb::before {
+  content: '›';
+  color: var(--k-border-strong);
+}
+
+.course-layout-body {
+  display: flex;
+  gap: 0;
+  min-height: calc(100vh - 57px);
+}
+
+.course-layout-content {
+  flex: 1;
+  padding: 24px;
+  min-width: 0;
+}

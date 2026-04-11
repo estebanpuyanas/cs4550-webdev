@@ -1,0 +1,226 @@
+#wd-quizzes {
+  padding-top: 4px;
+}
+
+.quiz-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.quiz-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px !important;
+  background: var(--k-surface-alt) !important;
+  border: 1px solid var(--k-border) !important;
+  border-bottom: none !important;
+  border-radius: var(--k-r) var(--k-r) 0 0 !important;
+}
+
+.quiz-section-header-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--k-text-sub);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quiz-section-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--k-text-muted);
+}
+
+.quiz-list {
+  border: 1px solid var(--k-border) !important;
+  border-radius: 0 0 var(--k-r) var(--k-r) !important;
+  overflow: hidden;
+  box-shadow: var(--k-shadow-xs);
+}
+
+.quiz-item {
+  border: none !important;
+  border-left: 4px solid var(--k-emerald) !important;
+  border-bottom: 1px solid var(--k-border) !important;
+  border-radius: 0 !important;
+  padding: 14px 16px !important;
+  background: var(--k-card) !important;
+  transition:
+    background var(--k-t-fast),
+    border-left-color var(--k-t-fast);
+}
+
+.quiz-item:last-child {
+  border-bottom: none !important;
+}
+
+.quiz-item:hover {
+  background: var(--k-surface) !important;
+  border-left-color: var(--k-emerald-deep) !important;
+}
+
+.quiz-item-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.quiz-item-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.quiz-item-grip {
+  color: var(--k-border-strong);
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+  cursor: grab;
+  transition: color var(--k-t-fast);
+}
+.quiz-item:hover .quiz-item-grip {
+  color: var(--k-text-muted);
+}
+
+.quiz-item-icon {
+  color: var(--k-emerald);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.quiz-item-body {
+  min-width: 0;
+}
+
+.quiz-item-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--k-text);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 3px;
+  transition: color var(--k-t-fast);
+}
+.quiz-item-title:hover {
+  color: var(--k-crimson);
+  text-decoration: none;
+}
+
+.quiz-item-meta {
+  font-size: 0.78rem;
+  color: var(--k-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.quiz-item-meta-sep {
+  color: var(--k-border-strong);
+}
+
+.quiz-meta-available {
+  color: var(--k-emerald);
+  font-weight: 600;
+}
+
+.quiz-meta-closed {
+  color: var(--k-crimson);
+  font-weight: 600;
+}
+
+.quiz-meta-not-available {
+  color: var(--k-text-sub);
+}
+
+.quiz-item-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.quiz-publish-icon {
+  font-size: 1rem;
+  transition:
+    opacity var(--k-t-fast),
+    transform var(--k-t-fast);
+}
+
+.quiz-publish-icon:hover {
+  opacity: 0.75;
+  transform: scale(1.1);
+}
+
+.quiz-menu-toggle {
+  background: transparent !important;
+  border: none !important;
+  padding: 4px 6px !important;
+  color: var(--k-text-muted) !important;
+  border-radius: var(--k-r-sm) !important;
+  box-shadow: none !important;
+  transition:
+    color var(--k-t-fast),
+    background var(--k-t-fast) !important;
+  display: flex;
+  align-items: center;
+}
+
+.quiz-menu-toggle:hover,
+.quiz-menu-toggle:focus,
+.quiz-menu-toggle:active {
+  background: var(--k-divider) !important;
+  color: var(--k-text) !important;
+  box-shadow: none !important;
+}
+
+.quiz-menu-toggle::after {
+  display: none !important;
+}
+
+#wd-quiz-details,
+#wd-quiz-student-details {
+  padding: 28px;
+  background: var(--k-card);
+  border: 1px solid var(--k-border);
+  border-radius: var(--k-r);
+  box-shadow: var(--k-shadow-xs);
+}
+
+#wd-quiz-details h3,
+#wd-quiz-student-details h3 {
+  margin-bottom: 4px;
+}
+
+#wd-quiz-preview {
+  background: var(--k-card);
+  border: 1px solid var(--k-border);
+  border-radius: var(--k-r);
+  box-shadow: var(--k-shadow-xs);
+  overflow: hidden;
+  min-height: 600px;
+}
+
+#wd-quiz-preview .border-end {
+  border-color: var(--k-border) !important;
+  background: var(--k-surface) !important;
+}
+
+#wd-quiz-editor .border {
+  border-color: var(--k-border) !important;
+  border-radius: 0 0 var(--k-r) var(--k-r) !important;
+  background: var(--k-card);
+}

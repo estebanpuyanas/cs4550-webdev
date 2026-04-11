@@ -1,4 +1,5 @@
 'use client';
+import '../../quizzes.css';
 import { useParams, useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';

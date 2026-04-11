@@ -1,0 +1,96 @@
+.kambaz-auth-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--k-bg);
+  padding: 40px 20px;
+}
+
+.kambaz-auth-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--k-card);
+  border: 1px solid var(--k-border);
+  border-radius: var(--k-r-lg);
+  box-shadow: var(--k-shadow-lg);
+  padding: 40px 36px 36px;
+}
+
+.kambaz-auth-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.kambaz-auth-brand {
+  font-family: var(--k-font-display);
+  font-size: 1.9rem;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: var(--k-text);
+  text-align: center;
+  margin: 0 0 4px;
+}
+
+.kambaz-auth-subtitle {
+  font-size: 0.85rem;
+  color: var(--k-text-muted);
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.kambaz-auth-field {
+  margin-bottom: 14px;
+}
+
+.kambaz-auth-field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--k-text-sub);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.kambaz-auth-submit {
+  width: 100%;
+  padding: 11px;
+  font-size: 0.925rem;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.kambaz-auth-link {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: var(--k-text-muted);
+}
+
+.kambaz-auth-link a {
+  color: var(--k-crimson);
+  text-decoration: none;
+  font-weight: 500;
+}
+.kambaz-auth-link a:hover {
+  text-decoration: underline;
+}
+
+.kambaz-auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  color: var(--k-text-disabled);
+  font-size: 0.78rem;
+}
+.kambaz-auth-divider::before,
+.kambaz-auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--k-border);
+}

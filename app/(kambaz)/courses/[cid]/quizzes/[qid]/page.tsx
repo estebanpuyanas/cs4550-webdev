@@ -1,8 +1,9 @@
 'use client';
+import '../quizzes.css';
 import { useParams, useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { FaCheckCircle, FaBan } from 'react-icons/fa';
 import { RootState } from '../../../../store';
 import { updateQuiz } from '../reducer';
