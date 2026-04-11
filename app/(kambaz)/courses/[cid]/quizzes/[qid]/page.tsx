@@ -2,7 +2,7 @@
 import { useParams, useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import { FaCheckCircle, FaBan } from 'react-icons/fa';
 import { RootState } from '../../../../store';
 import { updateQuiz } from '../reducer';
@@ -43,16 +43,69 @@ export default function QuizDetails() {
     }
   }, [qid, quizzes]);
 
+  // Wait for quiz to load before any role-based check
+  if (!quiz) return <div className='p-4'>Loading...</div>;
+
   if (!isFaculty) {
+    if (!quiz.published) {
+      return (
+        <div className='p-4 text-center'>
+          <h5 className='text-muted'>This quiz is not currently available.</h5>
+        </div>
+      );
+    }
+
+    const totalPoints =
+      quiz.questions?.reduce((sum: number, q: any) => sum + (q.points || 0), 0) ?? quiz.points;
+
     return (
-      <div className='p-4 text-center'>
-        <h4 className='text-danger'>Access Denied</h4>
-        <p>Only faculty can view quiz details.</p>
+      <div id='wd-quiz-student-details' className='p-4'>
+        <h3 className='mb-1'>{quiz.title}</h3>
+        {quiz.description && <p className='text-muted mb-3'>{quiz.description}</p>}
+
+        <hr />
+
+        <table className='table table-borderless mb-4' style={{ width: 'auto' }}>
+          <tbody>
+            <tr>
+              <td className='fw-bold pe-4 text-nowrap'>Points</td>
+              <td>{totalPoints} pts</td>
+            </tr>
+            <tr>
+              <td className='fw-bold pe-4 text-nowrap'>Questions</td>
+              <td>{quiz.questions?.length ?? 0}</td>
+            </tr>
+            <tr>
+              <td className='fw-bold pe-4 text-nowrap'>Time Limit</td>
+              <td>{quiz.timeLimitEnabled ? `${quiz.timeLimit} Minutes` : 'No limit'}</td>
+            </tr>
+            {quiz.multipleAttempts && (
+              <tr>
+                <td className='fw-bold pe-4 text-nowrap'>Allowed Attempts</td>
+                <td>{quiz.howManyAttempts}</td>
+              </tr>
+            )}
+            <tr>
+              <td className='fw-bold pe-4 text-nowrap'>Due</td>
+              <td>{quiz.dueDate || '–'}</td>
+            </tr>
+            <tr>
+              <td className='fw-bold pe-4 text-nowrap'>Available</td>
+              <td>
+                {quiz.availableFrom || '–'} – {quiz.availableUntil || '–'}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <Button
+          variant='danger'
+          onClick={() => router.push(`/courses/${cid}/quizzes/${qid}/preview`)}>
+          Take Quiz
+        </Button>
       </div>
     );
   }
-
-  if (!quiz) return <div className='p-4'>Loading...</div>;
 
   const handlePublishToggle = async () => {
     const updated = await client.updateQuiz({ ...quiz, published: !quiz.published });

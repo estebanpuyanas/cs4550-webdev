@@ -6,6 +6,7 @@ import { Button, Form, Nav, Row, Col } from 'react-bootstrap';
 import { RootState } from '../../../../../store';
 import { updateQuiz } from '../../reducer';
 import * as client from '../../client';
+import QuizQuestions from './QuizQuestions';
 
 export default function QuizEditor() {
   const { cid, qid } = useParams() as { cid: string; qid: string };
@@ -106,7 +107,7 @@ export default function QuizEditor() {
     dueDate,
     availableFrom,
     availableUntil,
-    questions,
+    questions: questions.map(({ editing, isNew, ...q }: any) => q),
     ...(published !== undefined && { published }),
   });
 
@@ -417,7 +418,7 @@ export default function QuizEditor() {
         )}
 
         {activeTab === 'questions' && (
-          <div className='p-4 text-center text-muted'>Questions editor — coming soon.</div>
+          <QuizQuestions questions={questions} setQuestions={setQuestions} />
         )}
       </div>
 
