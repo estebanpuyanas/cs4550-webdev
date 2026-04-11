@@ -6,6 +6,7 @@ import Breadcrumb from './Breadcrumb';
 import { useSelector } from 'react-redux';
 import { useParams, useRouter } from 'next/navigation';
 import { RootState } from '../../store';
+import './layout.css';
 
 export default function CoursesLayout({ children }: { children: ReactNode }) {
   const { cid } = useParams();
@@ -35,25 +36,26 @@ export default function CoursesLayout({ children }: { children: ReactNode }) {
 
   return (
     <div id='wd-courses'>
-      <div className='d-flex align-items-center gap-3 text-danger'>
-        <FaAlignJustify
-          className='fs-4'
-          style={{ cursor: 'pointer' }}
+      <div className='course-layout-header'>
+        <span
+          className='course-layout-toggle'
           onClick={() => setNavVisible(v => !v)}
-        />
-        {course?.name}
-        <h2 className='m-0 fs-5'>
+          title='Toggle navigation'>
+          <FaAlignJustify />
+        </span>
+        <span className='course-layout-name'>{course?.name}</span>
+        <span className='course-layout-breadcrumb'>
           <Breadcrumb course={course} />
-        </h2>
+        </span>
       </div>
-      <hr />
-      <div className='d-flex'>
+
+      <div className='course-layout-body'>
         {navVisible && (
           <div className='d-none d-md-block'>
             <CourseNavigation cid={cid as string} />
           </div>
         )}
-        <div className='flex-fill'>{children}</div>
+        <div className='course-layout-content'>{children}</div>
       </div>
     </div>
   );

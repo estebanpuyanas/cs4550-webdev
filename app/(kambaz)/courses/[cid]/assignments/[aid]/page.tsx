@@ -32,7 +32,7 @@ export default function AssignmentEditor() {
       populate(fromStore);
       setLoaded(true);
     } else {
-      client.findAssignmentsForCourse(cid).then((data) => {
+      client.findAssignmentsForCourse(cid).then(data => {
         dispatch(setAssignments(data));
         const found = data.find((a: any) => a._id === aid);
         if (found) populate(found);
@@ -164,16 +164,37 @@ export default function AssignmentEditor() {
               <b>Online Entry Options</b>
             </Form.Label>
             <div className='border p-3 rounded bg-light'>
-              <Form.Check type='checkbox' id='wd-chkbox-text-entry' label='Text Entry' disabled={!isFaculty} />
-              <Form.Check type='checkbox' id='wd-chkbox-web-url' label='Web URL' defaultChecked disabled={!isFaculty} />
-              <Form.Check type='checkbox' id='wd-chkbox-media-recording' label='Media Recording' disabled={!isFaculty} />
+              <Form.Check
+                type='checkbox'
+                id='wd-chkbox-text-entry'
+                label='Text Entry'
+                disabled={!isFaculty}
+              />
+              <Form.Check
+                type='checkbox'
+                id='wd-chkbox-web-url'
+                label='Web URL'
+                defaultChecked
+                disabled={!isFaculty}
+              />
+              <Form.Check
+                type='checkbox'
+                id='wd-chkbox-media-recording'
+                label='Media Recording'
+                disabled={!isFaculty}
+              />
               <Form.Check
                 type='checkbox'
                 id='wd-chkbox-student-annotation'
                 label='Student Annotation'
                 disabled={!isFaculty}
               />
-              <Form.Check type='checkbox' id='wd-chkbox-file-upload' label='File Upload' disabled={!isFaculty} />
+              <Form.Check
+                type='checkbox'
+                id='wd-chkbox-file-upload'
+                label='File Upload'
+                disabled={!isFaculty}
+              />
             </div>
           </Form.Group>
 

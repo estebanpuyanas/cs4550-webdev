@@ -1,17 +1,7 @@
 'use client';
+import './dashboard.css';
 import Link from 'next/link';
-import {
-  Card,
-  CardBody,
-  CardImg,
-  CardText,
-  CardTitle,
-  Button,
-  Row,
-  Col,
-  FormControl,
-  Form,
-} from 'react-bootstrap';
+import { Button, Row, Col, FormControl, Form } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCourses } from '../courses/reducer';
@@ -61,9 +51,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetchCourses();
-    if (currentUser) {
-      fetchEnrollments();
-    }
+    if (currentUser) fetchEnrollments();
   }, [currentUser]);
 
   const onAddNewCourse = async () => {
@@ -99,114 +87,123 @@ export default function Dashboard() {
 
   return (
     <div id='wd-dashboard'>
-      <div className='d-flex justify-content-between align-items-center'>
-        <h1 id='wd-dashboard-title'>Dashboard</h1>
-        <Button variant='primary' onClick={() => setShowAllCourses(prev => !prev)}>
-          Enrollments
+      <div className='dashboard-header'>
+        <h1 className='dashboard-title' id='wd-dashboard-title'>
+          Dashboard
+        </h1>
+        <Button
+          variant='outline-secondary'
+          size='sm'
+          onClick={() => setShowAllCourses(prev => !prev)}>
+          {showAllCourses ? 'My Courses' : 'All Courses'}
         </Button>
       </div>
       <hr />
 
       {isFaculty && (
-        <>
-          <h5>
+        <div className='dashboard-new-course'>
+          <div className='dashboard-new-course-title'>
             New Course
-            <button
-              className='btn btn-primary float-end'
-              id='wd-add-new-course-click'
-              onClick={onAddNewCourse}>
-              Add
-            </button>
-            <button
-              className='btn btn-warning float-end me-2'
-              onClick={onUpdateCourse}
-              disabled={course._id === '0'}
-              id='wd-update-course-click'>
-              Update
-            </button>
-          </h5>
-          <br />
+            <div className='d-flex gap-2'>
+              <button
+                className='btn btn-warning btn-sm'
+                onClick={onUpdateCourse}
+                disabled={course._id === '0'}
+                id='wd-update-course-click'>
+                Update
+              </button>
+              <button
+                className='btn btn-danger btn-sm'
+                id='wd-add-new-course-click'
+                onClick={onAddNewCourse}>
+                Add
+              </button>
+            </div>
+          </div>
           <FormControl
             value={course.name}
             className='mb-2'
+            placeholder='Course name'
             onChange={e => setCourse({ ...course, name: e.target.value })}
           />
           <Form.Control
             as='textarea'
             value={course.description}
-            rows={3}
+            rows={2}
+            placeholder='Course description'
             onChange={e => setCourse({ ...course, description: e.target.value })}
           />
-          <hr />
-        </>
+        </div>
       )}
 
-      <h2 id='wd-dashboard-published'>Published Courses ({courses.length})</h2>
-      <hr />
+      <p className='dashboard-section-title' id='wd-dashboard-published'>
+        Published Courses ({courses.length})
+      </p>
+
       <div id='wd-dashboard-courses'>
-        <Row xs={1} md={5} className='g-4'>
-          {visibleCourses.map((course: any) => (
-            <Col key={course._id} className='wd-dashboard-course' style={{ width: '380px' }}>
-              <Card>
-                <Link
-                  href={`/courses/${course._id}/home`}
-                  className='wd-dashboard-course-link text-decoration-none text-dark'>
-                  <CardImg src='/images/reactjs.jpg' variant='top' width='100%' height={160} />
-                  <CardBody className='card-body'>
-                    <CardTitle className='wd-dashboard-course-title text-nowrap overflow-hidden'>
-                      {course.name}
-                    </CardTitle>
-                    <CardText
-                      className='wd-dashboard-course-description overflow-hidden'
-                      style={{ height: '100px' }}>
-                      {course.description}
-                    </CardText>
-                    <div className='d-flex gap-2 mt-2'>
-                      <Button variant='primary'>Go</Button>
+        <Row xs={1} md={4} className='g-4'>
+          {visibleCourses.map((c: any) => (
+            <Col key={c._id} className='wd-dashboard-course' style={{ maxWidth: '320px' }}>
+              <Link
+                href={`/courses/${c._id}/home`}
+                className='wd-dashboard-course-link text-decoration-none text-dark'>
+                <div className='course-card'>
+                  <div className='course-card-image-wrap'>
+                    <img src='/images/reactjs.jpg' alt={c.name} />
+                  </div>
+                  <div className='course-card-body'>
+                    <div className='course-card-title wd-dashboard-course-title'>{c.name}</div>
+                    <div className='course-card-description wd-dashboard-course-description'>
+                      {c.description}
+                    </div>
+                    <div className='course-card-actions'>
+                      <Button variant='outline-secondary' size='sm'>
+                        Go
+                      </Button>
                       {isFaculty ? (
                         <>
                           <button
                             id='wd-edit-course-click'
                             onClick={event => {
                               event.preventDefault();
-                              setCourse(course);
+                              setCourse(c);
                             }}
-                            className='btn btn-warning'>
+                            className='btn btn-warning btn-sm'>
                             Edit
                           </button>
                           <button
                             onClick={event => {
                               event.preventDefault();
-                              onDeleteCourse(course._id);
+                              onDeleteCourse(c._id);
                             }}
-                            className='btn btn-danger'
+                            className='btn btn-danger btn-sm'
                             id='wd-delete-course-click'>
                             Delete
                           </button>
                         </>
-                      ) : isEnrolled(course._id) ? (
+                      ) : isEnrolled(c._id) ? (
                         <button
                           onClick={event => {
                             event.preventDefault();
-                            onUnenroll(course._id);
+                            onUnenroll(c._id);
                           }}
-                          className='btn btn-danger'>
+                          className='btn btn-danger btn-sm'>
                           Unenroll
                         </button>
                       ) : (
                         <button
                           onClick={event => {
                             event.preventDefault();
-                            onEnroll(course._id);
+                            onEnroll(c._id);
                           }}
-                          className='btn btn-success'>
+                          className='btn btn-success btn-sm'>
                           Enroll
                         </button>
                       )}
                     </div>
-                  </CardBody>
-                </Link>
-              </Card>
+                  </div>
+                </div>
+              </Link>
             </Col>
           ))}
         </Row>

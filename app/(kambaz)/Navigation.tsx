@@ -1,66 +1,54 @@
+'use client';
 import { AiOutlineDashboard } from 'react-icons/ai';
 import { IoCalendarOutline } from 'react-icons/io5';
 import { LiaBookSolid, LiaCogSolid } from 'react-icons/lia';
 import { FaInbox, FaRegCircleUser } from 'react-icons/fa6';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import './Navigation.css';
+
+const NAV_ITEMS = [
+  { href: '/account', Icon: FaRegCircleUser, label: 'Account', id: 'wd-account-link' },
+  { href: '/dashboard', Icon: AiOutlineDashboard, label: 'Dashboard', id: 'wd-dashboard-link' },
+  { href: '/courses', Icon: LiaBookSolid, label: 'Courses', id: 'wd-courses-link' },
+  { href: '/calendar', Icon: IoCalendarOutline, label: 'Calendar', id: 'wd-calendar-link' },
+  { href: '/inbox', Icon: FaInbox, label: 'Inbox', id: 'wd-inbox-link' },
+  { href: '/labs', Icon: LiaCogSolid, label: 'Labs', id: 'wd-labs-link' },
+] as const;
 
 export default function KambazNavigation() {
+  const pathname = usePathname();
+
   return (
-    <ListGroup
+    <nav
       id='wd-kambaz-navigation'
-      style={{ width: 110 }}
-      className='rounded-0 position-fixed bottom-0 top-0 d-none d-md-block bg-black z-2'>
-      <ListGroupItem
-        className='bg-black border-0 text-center'
-        as='a'
-        target='_blank'
+      className='position-fixed bottom-0 top-0 d-none d-md-flex flex-column'>
+      <a
         href='https://www.northeastern.edu/'
-        id='wd-neu-link'>
-        <img src='/images/NEU.png' width='75px' alt='Northeastern University' />
-      </ListGroupItem>
+        target='_blank'
+        rel='noreferrer'
+        id='wd-neu-link'
+        className='kambaz-nav-logo'>
+        <img src='/images/NEU.png' width='68px' alt='Northeastern University' />
+      </a>
 
-      <ListGroupItem className='border-0 bg-black text-center'>
-        <Link href='/account' id='wd-account-link' className='text-white text-decoration-none'>
-          <FaRegCircleUser className='fs-1 text-white' />
-          Account
-        </Link>
-      </ListGroupItem>
-
-      <ListGroupItem className='border-0 bg-white text-center'>
-        <Link href='/dashboard' id='wd-dashboard-link' className='text-danger text-decoration-none'>
-          <AiOutlineDashboard className='fs-1 text-danger' />
-          Dashboard
-        </Link>
-      </ListGroupItem>
-
-      <ListGroupItem className='border-0 bg-black text-center'>
-        <Link href='/courses' id='wd-courses-link' className='text-white text-decoration-none'>
-          <LiaBookSolid className='fs-1 text-danger' />
-          Courses
-        </Link>
-      </ListGroupItem>
-
-      <ListGroupItem className='border-0 bg-black text-center'>
-        <Link href='/calendar' id='wd-calendar-link' className='text-white text-decoration-none'>
-          <IoCalendarOutline className='fs-1 text-danger' />
-          Calendar
-        </Link>
-      </ListGroupItem>
-
-      <ListGroupItem className='border-0 bg-black text-center'>
-        <Link href='/inbox' id='wd-inbox-link' className='text-white text-decoration-none'>
-          <FaInbox className='fs-1 text-danger' />
-          Inbox
-        </Link>
-      </ListGroupItem>
-
-      <ListGroupItem className='border-0 bg-black text-center'>
-        <Link href='/labs' id='wd-labs-link' className='text-white text-decoration-none'>
-          <LiaCogSolid className='fs-1 text-danger' />
-          Labs
-        </Link>
-      </ListGroupItem>
-    </ListGroup>
+      <div className='kambaz-nav-links'>
+        {NAV_ITEMS.map(({ href, Icon, label, id }) => {
+          const isActive =
+            pathname === href ||
+            (href !== '/labs' && href !== '/account' && pathname?.startsWith(href + '/'));
+          return (
+            <Link
+              key={href}
+              href={href}
+              id={id}
+              className={`kambaz-nav-item${isActive ? ' kambaz-nav-active' : ''}`}>
+              <Icon className='kambaz-nav-icon' />
+              <span>{label}</span>
+            </Link>
+          );
+        })}
+      </div>
+    </nav>
   );
 }
