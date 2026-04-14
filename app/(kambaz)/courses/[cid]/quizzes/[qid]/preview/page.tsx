@@ -7,6 +7,8 @@ import { Button, Form, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { RootState } from '../../../../../store';
 import * as client from '../../client';
 
+type SubmitState = 'idle' | 'submitting' | 'error';
+
 export default function QuizPreview() {
   const { cid, qid } = useParams() as { cid: string; qid: string };
   const router = useRouter();
@@ -17,6 +19,8 @@ export default function QuizPreview() {
   const [quiz, setQuiz] = useState<any>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, any>>({});
+  const [submitState, setSubmitState] = useState<SubmitState>('idle');
+  const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
     const fromStore = quizzes.find((q: any) => q._id === qid);
@@ -193,12 +197,38 @@ export default function QuizPreview() {
             <Button variant='outline-secondary' onClick={() => setCurrentIndex(i => i + 1)}>
               Next →
             </Button>
+          ) : isFaculty ? (
+            <Button
+              variant='outline-secondary'
+              onClick={() => router.push(`/courses/${cid}/quizzes/${qid}`)}>
+              Back to Details
+            </Button>
           ) : (
-            <Button variant='danger' onClick={() => router.push(`/courses/${cid}/quizzes`)}>
-              {isFaculty ? 'Back to Quizzes' : 'Submit Quiz'}
+            <Button
+              variant='danger'
+              disabled={submitState === 'submitting'}
+              onClick={async () => {
+                setSubmitState('submitting');
+                setErrorMsg('');
+                const payload = Object.entries(answers).map(([questionId, answer]) => ({
+                  questionId,
+                  answer,
+                }));
+                try {
+                  await client.submitAttempt(qid, payload);
+                  router.push(`/courses/${cid}/quizzes/${qid}`);
+                } catch (err: any) {
+                  const msg = err?.response?.data?.message ?? 'Failed to submit. Please try again.';
+                  setErrorMsg(msg);
+                  setSubmitState('error');
+                }
+              }}>
+              {submitState === 'submitting' ? 'Submitting…' : 'Submit Quiz'}
             </Button>
           )}
         </div>
+
+        {errorMsg && <div className='alert alert-danger mt-3 py-2 small'>{errorMsg}</div>}
       </div>
     </div>
   );

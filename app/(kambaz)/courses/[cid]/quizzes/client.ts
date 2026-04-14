@@ -29,3 +29,20 @@ export const updateQuiz = async (quiz: any) => {
 export const deleteQuiz = async (quizId: string) => {
   await axiosWithCredentials.delete(`${QUIZZES_API}/${quizId}`);
 };
+
+export const submitAttempt = async (
+  quizId: string,
+  answers: { questionId: string; answer: any }[],
+) => {
+  const { data } = await axiosWithCredentials.post(`${QUIZZES_API}/${quizId}/attempts`, {
+    answers,
+  });
+  return data;
+};
+
+export const getMyLastAttempt = async (
+  quizId: string,
+): Promise<{ attempt: any | null; attemptCount: number }> => {
+  const { data } = await axiosWithCredentials.get(`${QUIZZES_API}/${quizId}/attempts/mine`);
+  return data;
+};

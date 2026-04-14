@@ -34,6 +34,8 @@ export default function QuizDetails() {
   const isFaculty = currentUser?.role === 'FACULTY';
 
   const [quiz, setQuiz] = useState<any>(null);
+  const [lastAttempt, setLastAttempt] = useState<any>(null);
+  const [attemptCount, setAttemptCount] = useState(0);
 
   useEffect(() => {
     const fromStore = quizzes.find((q: any) => q._id === qid);
@@ -43,6 +45,15 @@ export default function QuizDetails() {
       client.findQuizById(qid).then(setQuiz);
     }
   }, [qid, quizzes]);
+
+  useEffect(() => {
+    if (!isFaculty && currentUser) {
+      client.getMyLastAttempt(qid).then(({ attempt, attemptCount }) => {
+        setLastAttempt(attempt);
+        setAttemptCount(attemptCount);
+      });
+    }
+  }, [qid, isFaculty, currentUser]);
 
   // Wait for quiz to load before any role-based check
   if (!quiz) return <div className='p-4'>Loading...</div>;
@@ -58,6 +69,10 @@ export default function QuizDetails() {
 
     const totalPoints =
       quiz.questions?.reduce((sum: number, q: any) => sum + (q.points || 0), 0) ?? quiz.points;
+
+    const attemptsAllowed = quiz.multipleAttempts ? quiz.howManyAttempts : 1;
+    const hasAttempts = attemptCount > 0;
+    const canRetake = attemptCount < attemptsAllowed;
 
     return (
       <div id='wd-quiz-student-details' className='p-4'>
@@ -99,11 +114,37 @@ export default function QuizDetails() {
           </tbody>
         </table>
 
-        <Button
-          variant='danger'
-          onClick={() => router.push(`/courses/${cid}/quizzes/${qid}/preview`)}>
-          Take Quiz
-        </Button>
+        {hasAttempts && lastAttempt && (
+          <div className='quiz-attempt-summary mb-3'>
+            <div className='quiz-attempt-summary-score'>
+              {lastAttempt.score} / {lastAttempt.totalPoints} pts
+            </div>
+            <div className='quiz-attempt-summary-meta'>
+              {quiz.multipleAttempts
+                ? `Attempt ${lastAttempt.attemptNumber} of ${attemptsAllowed}`
+                : 'Completed'}{' '}
+              &middot; {new Date(lastAttempt.submittedAt).toLocaleDateString()}
+            </div>
+          </div>
+        )}
+
+        <div className='d-flex gap-2 flex-wrap align-items-center'>
+          {hasAttempts && (
+            <Button
+              variant='outline-secondary'
+              onClick={() => router.push(`/courses/${cid}/quizzes/${qid}/results`)}>
+              View Last Attempt
+            </Button>
+          )}
+          {canRetake && (
+            <Button
+              variant='danger'
+              onClick={() => router.push(`/courses/${cid}/quizzes/${qid}/preview`)}>
+              {hasAttempts ? 'Retake Quiz' : 'Take Quiz'}
+            </Button>
+          )}
+          {!canRetake && <p className='text-muted small mb-0'>No attempts remaining.</p>}
+        </div>
       </div>
     );
   }
@@ -120,7 +161,9 @@ export default function QuizDetails() {
   return (
     <div id='wd-quiz-details' className='p-4'>
       <div className='d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2'>
-        <h3 className='mb-0' style={{ minWidth: 0 }}>{quiz.title}</h3>
+        <h3 className='mb-0' style={{ minWidth: 0 }}>
+          {quiz.title}
+        </h3>
         <div className='d-flex gap-2 flex-shrink-0 flex-wrap'>
           <Button
             variant={quiz.published ? 'success' : 'secondary'}
