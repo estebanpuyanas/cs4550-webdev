@@ -25,7 +25,7 @@ export default function Quizzes() {
 
   useEffect(() => {
     client.findQuizzesForCourse(cid).then(data => dispatch(setQuizzes(data)));
-  }, [cid]);
+  }, [cid, dispatch]);
 
   const handleAddQuiz = async () => {
     const newQuiz = await client.createQuiz(cid, {
@@ -64,9 +64,7 @@ export default function Quizzes() {
     if (until && now > until) return <span className='quiz-meta-closed'>Closed</span>;
     if (from && now < from)
       return (
-        <span className='quiz-meta-not-available'>
-          Not available until {quiz.availableFrom}
-        </span>
+        <span className='quiz-meta-not-available'>Not available until {quiz.availableFrom}</span>
       );
     return <span className='quiz-meta-available'>Available</span>;
   };
@@ -106,9 +104,7 @@ export default function Quizzes() {
                 <BsGripVertical className='quiz-item-grip' />
                 <LuClipboardList className='quiz-item-icon' />
                 <div className='quiz-item-body'>
-                  <Link
-                    href={`/courses/${cid}/quizzes/${quiz._id}`}
-                    className='quiz-item-title'>
+                  <Link href={`/courses/${cid}/quizzes/${quiz._id}`} className='quiz-item-title'>
                     {quiz.title}
                   </Link>
                   <div className='quiz-item-meta'>
@@ -147,16 +143,12 @@ export default function Quizzes() {
 
                 {isFaculty && (
                   <Dropdown align='end'>
-                    <Dropdown.Toggle
-                      id={`quiz-menu-${quiz._id}`}
-                      className='quiz-menu-toggle'>
+                    <Dropdown.Toggle id={`quiz-menu-${quiz._id}`} className='quiz-menu-toggle'>
                       <IoEllipsisVertical />
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Dropdown.Item
-                        onClick={() =>
-                          router.push(`/courses/${cid}/quizzes/${quiz._id}/edit`)
-                        }>
+                        onClick={() => router.push(`/courses/${cid}/quizzes/${quiz._id}/edit`)}>
                         Edit
                       </Dropdown.Item>
                       <Dropdown.Item onClick={() => handlePublishToggle(quiz)}>

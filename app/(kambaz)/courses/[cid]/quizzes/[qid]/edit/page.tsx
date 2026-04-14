@@ -51,7 +51,7 @@ export default function QuizEditor() {
         setLoaded(true);
       });
     }
-  }, [qid]);
+  }, [qid, quizzes]);
 
   function populate(q: any) {
     setTitle(q.title ?? 'New Quiz');
