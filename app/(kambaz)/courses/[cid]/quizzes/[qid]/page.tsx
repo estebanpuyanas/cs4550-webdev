@@ -95,12 +95,10 @@ export default function QuizDetails() {
               <td className='fw-bold pe-4 text-nowrap'>Time Limit</td>
               <td>{quiz.timeLimitEnabled ? `${quiz.timeLimit} Minutes` : 'No limit'}</td>
             </tr>
-            {quiz.multipleAttempts && (
-              <tr>
-                <td className='fw-bold pe-4 text-nowrap'>Allowed Attempts</td>
-                <td>{quiz.howManyAttempts}</td>
-              </tr>
-            )}
+            <tr>
+              <td className='fw-bold pe-4 text-nowrap'>Allowed Attempts</td>
+              <td>{quiz.multipleAttempts ? quiz.howManyAttempts : 1}</td>
+            </tr>
             <tr>
               <td className='fw-bold pe-4 text-nowrap'>Due</td>
               <td>{quiz.dueDate || '–'}</td>
